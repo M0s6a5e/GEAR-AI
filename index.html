@@ -2,12 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GEAR AI - الذكاء الاصطناعي المتطور</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
- <style>
+    <style>
         :root {
             --primary-bg: #000000;
             --secondary-bg: #1c1c1e;
@@ -18,6 +18,7 @@
             --accent-green: #30d158;
             --accent-orange: #ff9f0a;
             --accent-red: #ff453a;
+            --accent-purple: #bf5af2;
             --glass-bg: rgba(28, 28, 30, 0.8);
             --glass-border: rgba(255, 255, 255, 0.1);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -31,7 +32,12 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            -webkit-tap-highlight-color: transparent; /* إزالة التحديد الأزرق عند النقر على الهواتف */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -40,8 +46,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* تحسين الأداء على الهواتف */
-            -webkit-overflow-scrolling: touch;
+            -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
 
@@ -58,7 +63,7 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px; /* تقليل padding على الهواتف */
+            padding: 0 20px;
         }
 
         .ios-glass {
@@ -89,10 +94,31 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(10, 132, 255, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(10, 132, 255, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(10, 132, 255, 0.5); }
+        }
+
         .animate-fade { animation: fadeIn 0.6s ease-out; }
         .animate-scale { animation: scaleIn 0.4s ease-out; }
         .animate-slide-right { animation: slideInFromRight 0.5s ease-out; }
         .animate-slide-left { animation: slideInFromLeft 0.5s ease-out; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-glow { animation: glow 2s ease-in-out infinite; }
 
         .ios-btn {
             display: inline-flex;
@@ -110,9 +136,6 @@
             position: relative;
             overflow: hidden;
             gap: 8px;
-            /* تحسين حجم اللمس على الهواتف */
-            min-height: 44px;
-            min-width: 44px;
         }
 
         .ios-btn::before {
@@ -178,42 +201,40 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            /* تحسين للأجهزة المحمولة */
-            padding: 5px 0;
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0; /* تقليل padding على الهواتف */
+            padding: 12px 0;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            font-size: 18px; /* تصغير حجم الخط على الهواتف */
+            font-size: 22px;
             font-weight: 700;
             color: var(--primary-text);
-            gap: 8px; /* تقليل المسافة بين العناصر */
+            gap: 12px;
         }
 
         .logo-icon {
-            width: 35px; /* تصغير حجم الأيقونة على الهواتف */
-            height: 35px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            border-radius: 10px; /* تصغير الزوايا على الهواتف */
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 18px; /* تصغير حجم الخط على الهواتف */
+            font-size: 20px;
         }
 
         .nav-links {
             display: flex;
-            gap: 20px; /* تقليل المسافة بين العناصر على الهواتف */
+            gap: 32px;
             align-items: center;
         }
 
@@ -221,8 +242,7 @@
             font-weight: 500;
             transition: all 0.3s;
             position: relative;
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
-            padding: 8px 0; /* إضافة padding للسهولة على اللمس */
+            font-size: 16px;
         }
 
         .nav-links a::after {
@@ -253,7 +273,6 @@
             border-radius: var(--element-radius);
             transition: all 0.3s;
             background: var(--tertiary-bg);
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .language-switcher:hover {
@@ -262,7 +281,7 @@
 
         .nav-actions {
             display: flex;
-            gap: 12px; /* تقليل المسافة بين العناصر على الهواتف */
+            gap: 16px;
             align-items: center;
         }
 
@@ -270,11 +289,11 @@
             display: none;
             background: none;
             border: none;
-            font-size: 20px; /* تصغير حجم الأيقونة على الهواتف */
+            font-size: 24px;
             cursor: pointer;
             color: var(--primary-text);
-            width: 40px; /* تصغير حجم الزر على الهواتف */
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--element-radius);
             align-items: center;
             justify-content: center;
@@ -287,7 +306,6 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            padding: 20px 0; /* إضافة padding على الهواتف */
         }
 
         .hero-video-bg {
@@ -315,7 +333,7 @@
         .hero-container {
             display: flex;
             align-items: center;
-            gap: 40px; /* تقليل المسافة بين العناصر على الهواتف */
+            gap: 60px;
             width: 100%;
         }
 
@@ -340,27 +358,27 @@
         }
 
         .hero h1 {
-            font-size: 36px; /* تصغير حجم العنوان على الهواتف */
-            margin-bottom: 20px; /* تقليل المسافة على الهواتف */
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 24px;
             font-weight: 700;
-            line-height: 1.2; /* تحسين تباعد الأسطر على الهواتف */
+            line-height: 1.1;
             background: linear-gradient(135deg, var(--primary-text), var(--accent-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 16px; /* تصغير حجم النص على الهواتف */
+            font-size: clamp(1rem, 2vw, 1.25rem);
             color: var(--secondary-text);
-            margin-bottom: 30px; /* تقليل المسافة على الهواتف */
-            line-height: 1.5; /* تحسين تباعد الأسطر على الهواتف */
+            margin-bottom: 40px;
+            line-height: 1.6;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 12px; /* تقليل المسافة بين الأزرار على الهواتف */
-            margin-bottom: 40px; /* تقليل المسافة على الهواتف */
-            flex-wrap: wrap; /* السماح للأزرار بالتفاف على الهواتف */
+            gap: 16px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
         }
 
         .ai-section {
@@ -394,7 +412,7 @@
         }
 
         .ai-chat-header {
-            padding: 15px; /* تقليل padding على الهواتف */
+            padding: 20px;
             border-bottom: 1px solid var(--glass-border);
             display: flex;
             justify-content: space-between;
@@ -404,31 +422,31 @@
         }
 
         .ai-chat-title {
-            font-size: 18px; /* تصغير حجم الخط على الهواتف */
+            font-size: 20px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px; /* تقليل المسافة بين العناصر على الهواتف */
+            gap: 12px;
         }
 
         .ai-chat-actions {
             display: flex;
-            gap: 10px; /* تقليل المسافة بين الأزرار على الهواتف */
+            gap: 12px;
         }
 
         .ai-btn {
             background: var(--tertiary-bg);
             border: none;
             color: var(--primary-text);
-            width: 40px; /* تصغير حجم الأزرار على الهواتف */
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--element-radius);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 16px; /* تصغير حجم الأيقونات على الهواتف */
+            font-size: 18px;
         }
 
         .ai-btn:hover {
@@ -438,23 +456,20 @@
 
         .ai-chat-messages {
             flex: 1;
-            padding: 15px; /* تقليل padding على الهواتف */
+            padding: 20px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px; /* تقليل المسافة بين الرسائل على الهواتف */
-            /* تحسين التمرير على الهواتف */
-            -webkit-overflow-scrolling: touch;
+            gap: 16px;
         }
 
         .message {
-            max-width: 85%; /* زيادة العرض النسبي للرسائل على الهواتف */
-            padding: 12px; /* تقليل padding على الهواتف */
+            max-width: 70%;
+            padding: 16px;
             border-radius: 18px;
             position: relative;
             animation: fadeIn 0.4s ease-out;
-            line-height: 1.4; /* تحسين تباعد الأسطر على الهواتف */
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
+            line-height: 1.5;
         }
 
         .user-message {
@@ -472,33 +487,32 @@
         }
 
         .message-time {
-            font-size: 11px; /* تصغير حجم الوقت على الهواتف */
+            font-size: 12px;
             opacity: 0.7;
-            margin-top: 6px; /* تقليل المسافة على الهواتف */
+            margin-top: 8px;
             text-align: right;
         }
 
         .ai-loading {
             display: flex;
             align-items: center;
-            gap: 8px; /* تقليل المسافة بين العناصر على الهواتف */
-            padding: 12px; /* تقليل padding على الهواتف */
+            gap: 10px;
+            padding: 15px;
             background: var(--tertiary-bg);
             border-radius: 18px;
             align-self: flex-start;
             border-bottom-left-radius: 5px;
             max-width: 120px;
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .loading-dots {
             display: flex;
-            gap: 4px; /* تقليل المسافة بين النقاط على الهواتف */
+            gap: 5px;
         }
 
         .loading-dot {
-            width: 6px; /* تصغير حجم النقاط على الهواتف */
-            height: 6px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--accent-blue);
             animation: bounce 1.4s infinite ease-in-out;
@@ -513,25 +527,25 @@
         }
 
         .ai-chat-input-container {
-            padding: 15px; /* تقليل padding على الهواتف */
+            padding: 20px;
             border-top: 1px solid var(--glass-border);
             display: flex;
-            gap: 10px; /* تقليل المسافة بين العناصر على الهواتف */
+            gap: 12px;
             align-items: flex-end;
             background: var(--glass-bg);
         }
 
         .ai-chat-input {
             flex: 1;
-            padding: 12px 15px; /* تقليل padding على الهواتف */
+            padding: 16px 20px;
             border: 1px solid var(--glass-border);
             border-radius: var(--element-radius);
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
+            font-size: 16px;
             background: var(--tertiary-bg);
             color: var(--primary-text);
             resize: none;
             max-height: 120px;
-            min-height: 44px; /* ضمان حجم مناسب لللمس */
+            min-height: 50px;
             transition: all 0.3s ease;
         }
 
@@ -545,15 +559,15 @@
             background: var(--accent-blue);
             color: white;
             border: none;
-            width: 44px; /* ضمان حجم مناسب لللمس */
-            height: 44px;
+            width: 50px;
+            height: 50px;
             border-radius: var(--element-radius);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 16px; /* تصغير حجم الأيقونة على الهواتف */
+            font-size: 18px;
         }
 
         .ai-send-btn:hover:not(:disabled) {
@@ -569,17 +583,13 @@
         }
 
         .ai-sidebar {
-            width: 100%; /* استخدام العرض الكامل على الهواتف */
+            width: 380px;
             background: var(--secondary-bg);
             border-left: 1px solid var(--glass-border);
             display: flex;
             flex-direction: column;
             transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            z-index: 10;
+            position: relative;
         }
 
         .ai-sidebar.hidden {
@@ -587,7 +597,7 @@
         }
 
         .ai-sidebar-header {
-            padding: 15px; /* تقليل padding على الهواتف */
+            padding: 20px;
             border-bottom: 1px solid var(--glass-border);
             display: flex;
             justify-content: space-between;
@@ -596,18 +606,18 @@
         }
 
         .ai-sidebar-title {
-            font-size: 16px; /* تصغير حجم الخط على الهواتف */
+            font-size: 18px;
             font-weight: 600;
         }
 
         .ai-sidebar-close {
             background: none;
             border: none;
-            font-size: 18px; /* تصغير حجم الأيقونة على الهواتف */
+            font-size: 20px;
             cursor: pointer;
             color: var(--primary-text);
-            width: 40px; /* تصغير حجم الزر على الهواتف */
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--element-radius);
             display: flex;
             align-items: center;
@@ -620,56 +630,54 @@
         }
 
         .ai-user-info {
-            padding: 20px 15px; /* تقليل padding على الهواتف */
+            padding: 24px 20px;
             border-bottom: 1px solid var(--glass-border);
             text-align: center;
         }
 
         .ai-user-avatar {
-            width: 70px; /* تصغير حجم الصورة على الهواتف */
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px; /* تصغير حجم الخط على الهواتف */
+            font-size: 30px;
             font-weight: bold;
-            margin: 0 auto 12px; /* تقليل المسافة على الهواتف */
+            margin: 0 auto 16px;
         }
 
         .ai-user-name {
-            font-size: 16px; /* تصغير حجم الخط على الهواتف */
+            font-size: 18px;
             font-weight: 600;
             margin-bottom: 4px;
         }
 
         .ai-user-email {
             color: var(--secondary-text);
-            font-size: 13px; /* تصغير حجم الخط على الهواتف */
-            margin-bottom: 12px; /* تقليل المسافة على الهواتف */
+            font-size: 14px;
+            margin-bottom: 16px;
         }
 
         .ai-message-count {
             background: var(--tertiary-bg);
-            padding: 10px 12px; /* تقليل padding على الهواتف */
+            padding: 12px 16px;
             border-radius: var(--element-radius);
-            font-size: 13px; /* تصغير حجم الخط على الهواتف */
+            font-size: 14px;
         }
 
         .ai-conversations {
             flex: 1;
-            padding: 15px; /* تقليل padding على الهواتف */
+            padding: 20px;
             overflow-y: auto;
-            /* تحسين التمرير على الهواتف */
-            -webkit-overflow-scrolling: touch;
         }
 
         .ai-conversation-item {
-            padding: 12px; /* تقليل padding على الهواتف */
+            padding: 16px;
             border-radius: var(--element-radius);
-            margin-bottom: 10px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid transparent;
@@ -688,15 +696,14 @@
 
         .ai-conversation-title {
             font-weight: 500;
-            margin-bottom: 4px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .ai-conversation-preview {
-            font-size: 12px; /* تصغير حجم الخط على الهواتف */
+            font-size: 14px;
             color: var(--secondary-text);
             white-space: nowrap;
             overflow: hidden;
@@ -705,17 +712,17 @@
 
         .ai-quick-questions {
             display: grid;
-            grid-template-columns: 1fr; /* استخدام عمود واحد على الهواتف */
-            gap: 8px; /* تقليل المسافة بين الأسئلة على الهواتف */
-            padding: 15px; /* تقليل padding على الهواتف */
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 20px;
         }
 
         .ai-quick-question {
-            padding: 10px 12px; /* تقليل padding على الهواتف */
+            padding: 12px 16px;
             background: var(--tertiary-bg);
             border-radius: var(--element-radius);
             text-align: center;
-            font-size: 13px; /* تصغير حجم الخط على الهواتف */
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid transparent;
@@ -726,46 +733,47 @@
             border-color: var(--accent-blue);
         }
 
+        /* تحسينات كروت المميزات */
         .features {
-            padding: 60px 0; /* تقليل padding على الهواتف */
+            padding: 100px 0;
             background: var(--secondary-bg);
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 80px;
         }
 
         .section-title h2 {
-            font-size: 28px; /* تصغير حجم العنوان على الهواتف */
-            margin-bottom: 12px; /* تقليل المسافة على الهواتف */
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 16px;
             font-weight: 700;
         }
 
         .section-title p {
-            font-size: 16px; /* تصغير حجم النص على الهواتف */
+            font-size: clamp(1rem, 2vw, 1.125rem);
             color: var(--secondary-text);
             max-width: 600px;
             margin: 0 auto;
-            padding: 0 15px; /* إضافة padding على الهواتف */
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* تعديل العرض الأدنى على الهواتف */
-            gap: 20px; /* تقليل المسافة بين البطاقات على الهواتف */
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 24px;
         }
 
         .feature-card {
             background: var(--glass-bg);
             backdrop-filter: var(--blur-intensity);
             border-radius: var(--card-radius);
-            padding: 30px 20px; /* تقليل padding على الهواتف */
+            padding: 40px 30px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             border: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .feature-card::before {
@@ -776,6 +784,9 @@
             width: 100%;
             height: 4px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
 
         .feature-card:hover {
@@ -783,45 +794,79 @@
             border-color: var(--accent-blue);
         }
 
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
         .feature-icon {
-            width: 60px; /* تصغير حجم الأيقونة على الهواتف */
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            border-radius: 15px; /* تصغير الزوايا على الهواتف */
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px; /* تقليل المسافة على الهواتف */
+            margin: 0 auto 24px;
             color: white;
-            font-size: 24px; /* تصغير حجم الأيقونة على الهواتف */
-            transition: all 0.3s ease;
+            font-size: 32px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
         }
 
         .feature-card:hover .feature-icon {
             transform: scale(1.1) rotate(5deg);
+            animation: glow 2s infinite;
+        }
+
+        .feature-card:hover .feature-icon::after {
+            left: 100%;
         }
 
         .feature-card h3 {
-            font-size: 18px; /* تصغير حجم العنوان على الهواتف */
-            margin-bottom: 12px; /* تقليل المسافة على الهواتف */
+            font-size: 20px;
+            margin-bottom: 16px;
             font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .feature-card:hover h3 {
+            color: var(--accent-blue);
         }
 
         .feature-card p {
             color: var(--secondary-text);
-            font-size: 14px; /* تصغير حجم النص على الهواتف */
-            line-height: 1.5; /* تحسين تباعد الأسطر على الهواتف */
+            font-size: 16px;
+            line-height: 1.6;
+            transition: color 0.3s ease;
         }
 
+        .feature-card:hover p {
+            color: var(--primary-text);
+        }
+
+        /* تحسينات قسم التطبيقات */
         .apps {
-            padding: 60px 0; /* تقليل padding على الهواتف */
+            padding: 100px 0;
             background: var(--primary-bg);
         }
 
         .apps-container {
             display: flex;
             align-items: center;
-            gap: 40px; /* تقليل المسافة بين العناصر على الهواتف */
+            gap: 60px;
         }
 
         .apps-content {
@@ -831,6 +876,7 @@
         .apps-image {
             flex: 1;
             text-align: center;
+            position: relative;
         }
 
         .apps-image img {
@@ -839,26 +885,93 @@
             box-shadow: var(--shadow);
         }
 
+        .app-unavailable {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--tertiary-bg), var(--secondary-bg));
+            border-radius: var(--card-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-text);
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed var(--glass-border);
+        }
+
+        .app-unavailable::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(10, 132, 255, 0.1) 10px,
+                rgba(10, 132, 255, 0.1) 20px
+            );
+            animation: slide 3s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-20px); }
+            100% { transform: translateX(0); }
+        }
+
+        .app-unavailable i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: var(--accent-blue);
+            animation: pulse 2s infinite;
+        }
+
+        .app-unavailable span {
+            font-size: 18px;
+            color: var(--accent-blue);
+            margin-top: 10px;
+        }
+
         .apps-buttons {
             display: flex;
-            gap: 12px; /* تقليل المسافة بين الأزرار على الهواتف */
-            margin-top: 25px; /* تقليل المسافة على الهواتف */
-            flex-wrap: wrap; /* السماح للأزرار بالتفاف على الهواتف */
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
         }
 
         .app-btn {
             display: flex;
             align-items: center;
-            gap: 10px; /* تقليل المسافة بين العناصر على الهواتف */
+            gap: 12px;
             background: var(--tertiary-bg);
             color: var(--primary-text);
-            padding: 12px 18px; /* تقليل padding على الهواتف */
+            padding: 16px 24px;
             border-radius: var(--element-radius);
             font-weight: 500;
             transition: all 0.3s ease;
             border: 1px solid var(--glass-border);
-            flex: 1; /* السماح للأزرار بالتوسع على الهواتف */
-            min-width: 150px; /* تحديد حد أدنى للعرض */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .app-btn:hover::before {
+            left: 100%;
         }
 
         .app-btn:hover {
@@ -868,11 +981,11 @@
         }
 
         .app-btn i {
-            font-size: 20px; /* تصغير حجم الأيقونة على الهواتف */
+            font-size: 24px;
         }
 
         .community {
-            padding: 60px 0; /* تقليل padding على الهواتف */
+            padding: 100px 0;
             background: var(--secondary-bg);
             text-align: center;
         }
@@ -880,59 +993,58 @@
         .community-stats {
             display: flex;
             justify-content: center;
-            gap: 40px; /* تقليل المسافة بين الإحصائيات على الهواتف */
-            margin: 40px 0; /* تقليل المسافة على الهواتف */
-            flex-wrap: wrap; /* السماح للإحصائيات بالتفاف على الهواتف */
+            gap: 60px;
+            margin: 60px 0;
+            flex-wrap: wrap;
         }
 
         .stat {
             text-align: center;
-            flex: 1; /* السماح للإحصائيات بالتوسع على الهواتف */
-            min-width: 120px; /* تحديد حد أدنى للعرض */
+            flex: 1;
+            min-width: 150px;
         }
 
         .stat-number {
-            font-size: 36px; /* تصغير حجم الأرقام على الهواتف */
+            font-size: clamp(2.5rem, 5vw, 3.25rem);
             font-weight: 700;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 8px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 12px;
         }
 
         .stat-label {
-            font-size: 16px; /* تصغير حجم النص على الهواتف */
+            font-size: 18px;
             color: var(--secondary-text);
         }
 
         footer {
             background: var(--secondary-bg);
             color: var(--primary-text);
-            padding: 60px 0 20px; /* تقليل padding على الهواتف */
+            padding: 80px 0 20px;
             border-top: 1px solid var(--glass-border);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* تعديل العرض الأدنى على الهواتف */
-            gap: 30px; /* تقليل المسافة بين الأعمدة على الهواتف */
-            margin-bottom: 30px; /* تقليل المسافة على الهواتف */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-column h3 {
-            font-size: 18px; /* تصغير حجم العنوان على الهواتف */
-            margin-bottom: 20px; /* تقليل المسافة على الهواتف */
+            font-size: 20px;
+            margin-bottom: 24px;
             color: var(--accent-blue);
         }
 
         .footer-links li {
-            margin-bottom: 10px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 12px;
         }
 
         .footer-links a {
             color: var(--secondary-text);
             transition: color 0.3s;
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .footer-links a:hover {
@@ -941,16 +1053,16 @@
 
         .social-links {
             display: flex;
-            gap: 12px; /* تقليل المسافة بين الأيقونات على الهواتف */
-            margin-top: 20px; /* تقليل المسافة على الهواتف */
+            gap: 16px;
+            margin-top: 24px;
         }
 
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px; /* تصغير حجم الأيقونات على الهواتف */
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: var(--tertiary-bg);
             border-radius: var(--element-radius);
             color: var(--primary-text);
@@ -964,10 +1076,10 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 20px; /* تقليل المسافة على الهواتف */
+            padding-top: 24px;
             border-top: 1px solid var(--glass-border);
             color: var(--secondary-text);
-            font-size: 13px; /* تصغير حجم الخط على الهواتف */
+            font-size: 14px;
         }
 
         .auth-modal {
@@ -981,14 +1093,13 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
-            padding: 15px; /* إضافة padding على الهواتف */
         }
 
         .auth-container {
             background: var(--secondary-bg);
             border-radius: var(--card-radius);
-            width: 100%; /* استخدام العرض الكامل على الهواتف */
-            max-width: 400px; /* تقليل الحد الأقصى للعرض على الهواتف */
+            width: 90%;
+            max-width: 450px;
             box-shadow: var(--shadow);
             overflow: hidden;
             animation: scaleIn 0.4s ease-out;
@@ -998,32 +1109,32 @@
         .auth-header {
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
             color: white;
-            padding: 20px; /* تقليل padding على الهواتف */
+            padding: 25px;
             text-align: center;
             position: relative;
         }
 
         .auth-header h2 {
-            font-size: 20px; /* تصغير حجم العنوان على الهواتف */
+            font-size: 24px;
             margin-bottom: 5px;
         }
 
         .auth-header p {
             opacity: 0.9;
-            font-size: 13px; /* تصغير حجم النص على الهواتف */
+            font-size: 14px;
         }
 
         .close-auth {
             position: absolute;
-            top: 15px; /* تعديل الموضع على الهواتف */
-            left: 15px;
+            top: 20px;
+            left: 20px;
             background: none;
             border: none;
             color: white;
-            font-size: 18px; /* تصغير حجم الأيقونة على الهواتف */
+            font-size: 20px;
             cursor: pointer;
-            width: 35px; /* تصغير حجم الزر على الهواتف */
-            height: 35px;
+            width: 40px;
+            height: 40px;
             border-radius: var(--element-radius);
             display: flex;
             align-items: center;
@@ -1035,25 +1146,24 @@
         }
 
         .auth-body {
-            padding: 25px; /* تقليل padding على الهواتف */
+            padding: 30px;
         }
 
         .auth-tabs {
             display: flex;
-            margin-bottom: 20px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 25px;
             border-bottom: 1px solid var(--glass-border);
         }
 
         .auth-tab {
             flex: 1;
             text-align: center;
-            padding: 10px; /* تقليل padding على الهواتف */
+            padding: 12px;
             cursor: pointer;
             font-weight: 500;
             transition: all 0.3s;
             border-bottom: 3px solid transparent;
             color: var(--secondary-text);
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .auth-tab.active {
@@ -1071,16 +1181,15 @@
         }
 
         .form-group {
-            margin-bottom: 15px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 20px;
             position: relative;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 6px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 8px;
             font-weight: 500;
             color: var(--primary-text);
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .form-control {
@@ -1088,7 +1197,7 @@
             padding: 12px 15px;
             border: 1px solid var(--glass-border);
             border-radius: var(--element-radius);
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
+            font-size: 16px;
             transition: all 0.3s;
             background: var(--tertiary-bg);
             color: var(--primary-text);
@@ -1103,7 +1212,7 @@
         .password-toggle {
             position: absolute;
             left: 15px;
-            top: 35px; /* تعديل الموضع على الهواتف */
+            top: 40px;
             background: none;
             border: none;
             color: var(--secondary-text);
@@ -1117,8 +1226,8 @@
 
         .auth-footer {
             text-align: center;
-            margin-top: 15px; /* تقليل المسافة على الهواتف */
-            font-size: 13px; /* تصغير حجم الخط على الهواتف */
+            margin-top: 20px;
+            font-size: 14px;
             color: var(--secondary-text);
         }
 
@@ -1130,8 +1239,8 @@
         .auth-message {
             padding: 10px 15px;
             border-radius: var(--element-radius);
-            margin-bottom: 15px; /* تقليل المسافة على الهواتف */
-            font-size: 13px; /* تصغير حجم الخط على الهواتف */
+            margin-bottom: 20px;
+            font-size: 14px;
             display: none;
         }
 
@@ -1152,14 +1261,14 @@
         .user-profile {
             display: none;
             align-items: center;
-            gap: 8px; /* تقليل المسافة بين العناصر على الهواتف */
+            gap: 10px;
             cursor: pointer;
             position: relative;
         }
 
         .user-avatar {
-            width: 35px; /* تصغير حجم الصورة على الهواتف */
-            height: 35px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
             display: flex;
@@ -1167,12 +1276,10 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .user-name {
             font-weight: 500;
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .user-dropdown {
@@ -1183,10 +1290,10 @@
             background: var(--secondary-bg);
             border-radius: var(--element-radius);
             box-shadow: var(--shadow);
-            padding: 8px 0; /* تقليل padding على الهواتف */
-            width: 160px; /* تصغير العرض على الهواتف */
+            padding: 10px 0;
+            width: 180px;
             z-index: 100;
-            margin-top: 8px; /* تقليل المسافة على الهواتف */
+            margin-top: 10px;
             border: 1px solid var(--glass-border);
         }
 
@@ -1197,10 +1304,9 @@
 
         .user-dropdown a {
             display: block;
-            padding: 8px 15px; /* تقليل padding على الهواتف */
+            padding: 10px 20px;
             transition: all 0.3s;
             color: var(--primary-text);
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
         }
 
         .user-dropdown a:hover {
@@ -1216,8 +1322,8 @@
             transform: translate(-50%, -50%);
             background: var(--secondary-bg);
             border-radius: var(--card-radius);
-            width: 95%; /* استخدام عرض أكبر على الهواتف */
-            max-width: 450px; /* تقليل الحد الأقصى للعرض على الهواتف */
+            width: 90%;
+            max-width: 500px;
             box-shadow: var(--shadow);
             z-index: 2001;
             overflow: hidden;
@@ -1232,23 +1338,23 @@
         .ai-subscription-header {
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
             color: white;
-            padding: 20px; /* تقليل padding على الهواتف */
+            padding: 25px;
             text-align: center;
         }
 
         .ai-subscription-body {
-            padding: 25px; /* تقليل padding على الهواتف */
+            padding: 30px;
         }
 
         .ai-subscription-plans {
             display: flex;
             flex-direction: column;
-            gap: 12px; /* تقليل المسافة بين الخطط على الهواتف */
-            margin-bottom: 20px; /* تقليل المسافة على الهواتف */
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .ai-subscription-plan {
-            padding: 15px; /* تقليل padding على الهواتف */
+            padding: 20px;
             border: 2px solid var(--glass-border);
             border-radius: var(--element-radius);
             cursor: pointer;
@@ -1266,30 +1372,30 @@
         }
 
         .ai-plan-name {
-            font-size: 16px; /* تصغير حجم الخط على الهواتف */
+            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 8px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 10px;
         }
 
         .ai-plan-price {
-            font-size: 20px; /* تصغير حجم الخط على الهواتف */
+            font-size: 24px;
             font-weight: 700;
             color: var(--accent-blue);
-            margin-bottom: 8px; /* تقليل المسافة على الهواتف */
+            margin-bottom: 10px;
         }
 
         .ai-plan-features {
-            font-size: 13px; /* تصغير حجم الخط على الهواتف */
+            font-size: 14px;
             color: var(--secondary-text);
         }
 
         .ai-code-input {
             width: 100%;
-            padding: 12px; /* تقليل padding على الهواتف */
+            padding: 15px;
             border: 1px solid var(--glass-border);
             border-radius: var(--element-radius);
-            font-size: 14px; /* تصغير حجم الخط على الهواتف */
-            margin-bottom: 15px; /* تقليل المسافة على الهواتف */
+            font-size: 16px;
+            margin-bottom: 20px;
             background: var(--tertiary-bg);
             color: var(--primary-text);
         }
@@ -1315,27 +1421,27 @@
             display: block;
         }
 
-        /* تحسينات إضافية للهواتف */
+        /* تحسينات التجاوب للهواتف */
         @media (max-width: 1200px) {
             .ai-sidebar {
-                width: 100%;
+                width: 340px;
             }
         }
 
         @media (max-width: 992px) {
             .hero h1 {
-                font-size: 32px;
+                font-size: 42px;
             }
             
             .hero-container {
                 flex-direction: column;
                 text-align: center;
-                gap: 30px;
+                gap: 40px;
             }
             
             .apps-container {
                 flex-direction: column;
-                gap: 30px;
+                gap: 40px;
             }
             
             .ai-container {
@@ -1344,7 +1450,7 @@
             
             .ai-sidebar {
                 width: 100%;
-                height: 70vh; /* زيادة الارتفاع على الهواتف */
+                height: 50vh;
                 position: absolute;
                 bottom: 0;
                 left: 0;
@@ -1359,12 +1465,8 @@
             .ai-quick-questions {
                 grid-template-columns: 1fr;
             }
-            
+
             .hero-buttons {
-                justify-content: center;
-            }
-            
-            .apps-buttons {
                 justify-content: center;
             }
         }
@@ -1383,10 +1485,10 @@
                 right: 0;
                 background: var(--glass-bg);
                 backdrop-filter: var(--blur-intensity);
-                padding: 15px;
+                padding: 20px;
                 border-radius: 0 0 var(--card-radius) var(--card-radius);
                 z-index: 100;
-                gap: 12px;
+                gap: 16px;
             }
             
             .menu-toggle {
@@ -1394,11 +1496,11 @@
             }
             
             .hero h1 {
-                font-size: 28px;
+                font-size: 36px;
             }
             
             .hero p {
-                font-size: 15px;
+                font-size: 18px;
             }
             
             .hero-buttons {
@@ -1412,7 +1514,7 @@
             
             .community-stats {
                 flex-direction: column;
-                gap: 30px;
+                gap: 40px;
             }
             
             .apps-buttons {
@@ -1420,132 +1522,75 @@
             }
             
             .message {
-                max-width: 90%;
+                max-width: 85%;
             }
 
             .section-title h2 {
-                font-size: 24px;
+                font-size: 32px;
             }
-            
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .social-links {
-                justify-content: center;
+                gap: 30px;
             }
         }
 
         @media (max-width: 576px) {
             .hero {
-                padding: 60px 0;
-                min-height: 80vh; /* تقليل الارتفاع على الهواتف الصغيرة */
+                padding: 80px 0;
             }
             
             .features, .apps, .community {
-                padding: 50px 0;
+                padding: 80px 0;
             }
             
             .feature-card {
-                padding: 25px 15px;
+                padding: 30px 20px;
             }
 
             .stat-number {
-                font-size: 30px;
+                font-size: 42px;
             }
-            
+
             .container {
-                padding: 0 10px;
+                padding: 0 15px;
             }
-            
-            .hero-buttons .ios-btn,
-            .apps-buttons .app-btn {
-                width: 100%; /* استخدام العرض الكامل على الهواتف الصغيرة */
-            }
-            
+
             .ai-chat-input-container {
-                flex-direction: column;
-                gap: 10px;
+                padding: 15px;
             }
-            
-            .ai-send-btn {
+
+            .ai-chat-messages {
+                padding: 15px;
+            }
+
+            .hero-buttons .ios-btn {
                 width: 100%;
+                justify-content: center;
             }
         }
 
-        /* تحسينات خاصة للهواتف ذات الشاشات الصغيرة جداً */
         @media (max-width: 360px) {
+            .logo span {
+                display: none;
+            }
+            
             .hero h1 {
-                font-size: 24px;
+                font-size: 28px;
             }
             
             .hero p {
-                font-size: 14px;
-            }
-            
-            .section-title h2 {
-                font-size: 22px;
-            }
-            
-            .feature-card h3 {
                 font-size: 16px;
             }
             
-            .feature-card p {
-                font-size: 13px;
-            }
-            
-            .stat-number {
-                font-size: 26px;
-            }
-            
-            .stat-label {
-                font-size: 14px;
-            }
-        }
-
-        /* تحسينات للأجهزة التي تدعم اللمس */
-        @media (hover: none) and (pointer: coarse) {
-            .ios-btn:hover::before {
-                left: -100%;
-            }
-            
-            .feature-card:hover {
-                transform: none;
-            }
-            
-            .ai-btn:hover {
-                transform: none;
-            }
-            
-            .app-btn:hover {
-                transform: none;
-            }
-            
-            .social-links a:hover {
-                transform: none;
-            }
-            
-            /* إضافة تأثيرات اللمس بدلاً من hover */
-            .ios-btn:active {
-                transform: scale(0.95);
-            }
-            
-            .feature-card:active {
-                transform: scale(0.98);
-            }
-            
-            .ai-btn:active {
-                transform: scale(0.95);
-            }
-            
-            .app-btn:active {
-                transform: scale(0.98);
-            }
-            
-            .social-links a:active {
-                transform: scale(0.95);
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
             }
         }
     </style>
@@ -1624,7 +1669,7 @@
                 <div class="ai-chat-header">
                     <div class="ai-chat-title">
                         <i class="fas fa-robot"></i>
-                        GEAR AI
+                        GEAR
                     </div>
                     <div class="ai-chat-actions">
                         <button class="ai-btn" id="aiNewChat" title="محادثة جديدة">
@@ -1770,8 +1815,10 @@
                 </div>
                 
                 <div class="apps-image">
-                    <div style="width: 100%; height: 400px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-green)); border-radius: var(--card-radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">
-                        غير متوفر الان 
+                    <div class="app-unavailable">
+                        <i class="fas fa-mobile-alt"></i>
+                        غير متوفر حالياً
+                        <span>سيتم إطلاقه قريباً</span>
                     </div>
                 </div>
             </div>
