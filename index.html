@@ -1,2974 +1,2023 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GEAR AI - الذكاء الاصطناعي المتطور</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+
+    <!-- الكلمات المفتاحية المخصصة لـ GEAR AI -->
+<meta name="keywords" content="GEAR AI, ذكاء اصطناعي, الذكاء الاصطناعي, AI, Artificial Intelligence, روبوت محادثة, chatbot, تعلم آلة, machine learning, معالجة اللغة الطبيعية, NLP, حلول ذكية, أتمتة, innovation, innovation, future technology, GPT, مساعد ذكي">
+
+<!-- وصف الموقع -->
+<meta name="description" content="GEAR AI - مساعدك الذكي المتقدم. استفد من أحدث تقنيات الذكاء الاصطناعي للمحادثة، توليد النصوص، حل المشكلات، والإبداع. جرب قوة المستقبل اليوم.">
+
+<!-- Open Graph Tags للشكل الاحترافي على وسائل التواصل -->
+<meta property="og:title" content="GEAR AI | مساعدك الذكي المتقدم للذكاء الاصطناعي">
+<meta property="og:description" content="تجربة الثورة الصناعية الرابعة مع GEAR AI. محادثات ذكية، توليد نصوص مبدعة، وحلول ذكية لجميع استفساراتك.">
+<meta property="og:image" content="websima.png">
+<meta property="og:url" content="https://yourwebsite.com">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GEAR AI">
+
+<!-- Twitter Card Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GEAR AI | مساعدك الذكي المتقدم للذكاء الاصطناعي">
+<meta name="twitter:description" content="تجربة الثورة الصناعية الرابعة مع GEAR AI. محادثات ذكية، توليد نصوص مبدعة، وحلول ذكية.">
+<meta name="twitter:image" content="https://yourwebsite.com/images/gear-ai-og-image.jpg">
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <style>
-        :root {
-            --primary-bg: #000000;
-            --secondary-bg: #1c1c1e;
-            --tertiary-bg: #2c2c2e;
-            --primary-text: #ffffff;
-            --secondary-text: #ebebf5;
-            --accent-blue: #0a84ff;
-            --accent-green: #30d158;
-            --accent-orange: #ff9f0a;
-            --accent-red: #ff453a;
-            --accent-purple: #bf5af2;
-            --glass-bg: rgba(28, 28, 30, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --card-radius: 20px;
-            --element-radius: 14px;
-            --blur-intensity: blur(20px);
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --primary-color: #4891ff;
+        --gold-color: #FFD700;
+        --light-color: #f4f4f6;
+        --dark-color: #111;
+        --success-color: #10B981;
+        --warning-color: #F59E0B;
+        --danger-color: #EF4444;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        background: #fff;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: #fff;
+        padding: 20px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar .main-menu ul {
+        display: flex;
+      }
+
+      .navbar ul li a {
+        padding: 10px 20px;
+        display: block;
+        font-weight: 600;
+        transition: 0.5s;
+      }
+
+      .navbar ul li a:hover {
+        color: var(--primary-color);
+      }
+
+      .navbar ul li a i {
+        margin-left: 10px;
+      }
+
+      .navbar ul li:last-child a {
+        margin-right: 10px;
+      }
+
+      /* Hero Section with Video Background */
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        overflow: hidden;
+        margin-bottom: 0;
+        margin-top: 80px;
+      }
+
+      .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+
+      .hero-content {
+        z-index: 1;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .hero-heading {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      }
+
+      .hero-text {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      }
+
+      /* Video Section */
+      .video-section {
+        position: relative;
+        padding: 80px 0;
+        overflow: hidden;
+      }
+
+      .video-section-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .video-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.85);
+        z-index: -1;
+      }
+
+      .video-section-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .video-section-heading {
+        margin-bottom: 40px;
+        max-width: 700px;
+      }
+
+      .promo-code-container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        max-width: 500px;
+        width: 100%;
+        margin-top: 30px;
+      }
+
+      .promo-code-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .promo-code-input {
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      .promo-code-input:focus {
+        border-color: var(--primary-color);
+        outline: none;
+      }
+
+      .get-code-btn {
+        background: transparent;
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 15px;
+      }
+
+      .get-code-btn:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        position: relative;
+        padding: 80px 0;
+        overflow: hidden;
+      }
+
+      .testimonials-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .testimonials::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(244, 244, 246, 0.85);
+        z-index: -1;
+      }
+
+      .testimonials .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .testimonials .testimonials-heading {
+        width: 700px;
+        margin-bottom: 40px;
+      }
+
+      .testimonials .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .testimonials .card p:nth-child(2) {
+        margin-top: 30px;
+        font-weight: bold;
+      }
+
+      /* Pricing */
+      .pricing {
+        position: relative;
+        padding: 80px 0;
+        overflow: hidden;
+      }
+
+      .pricing-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .pricing::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        z-index: -1;
+      }
+
+      .pricing .container-sm {
+        position: relative;
+        z-index: 1;
+      }
+
+      .pricing .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .pricing .pricing-card-subheading {
+        margin-bottom: 30px;
+      }
+
+      .pricing .pricing-card-price {
+        margin-bottom: 30px;
+        padding: 20px 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .pricing ul {
+        margin: 30px 0;
+      }
+
+      .pricing ul li {
+        margin-bottom: 20px;
+      }
+
+      .pricing ul li i {
+        margin-left: 10px;
+      }
+
+      .pricing .pricing-footer {
+        margin: 30px 0;
+      }
+
+      /* Improved Pricing Cards */
+      .pricing-card {
+        transition: all 0.3s ease;
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      }
+
+      .pricing-card-header {
+        padding: 30px 30px 20px;
+        text-align: center;
+        position: relative;
+      }
+
+      .pricing-card-body {
+        padding: 0 30px 30px;
+      }
+
+      .pricing-card-popular {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--gold-color);
+        color: #333;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+
+      .pricing-card-price {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 20px 0;
+        color: var(--dark-color);
+      }
+
+      .pricing-card-period {
+        font-size: 1rem;
+        color: #666;
+      }
+
+      .pricing-features {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+      }
+
+      .pricing-features li {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+      }
+
+      .pricing-features li:last-child {
+        border-bottom: none;
+      }
+
+      .pricing-features i {
+        margin-left: 10px;
+        color: var(--primary-color);
+      }
+
+      .pricing-card-premium {
+        border: 2px solid var(--gold-color);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+      }
+
+      .pricing-card-premium .pricing-card-header {
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+        color: #333;
+      }
+
+      /* FAQ */
+      .faq {
+        position: relative;
+        padding: 80px 0;
+        overflow: hidden;
+      }
+
+      .faq-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .faq::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(244, 244, 246, 0.85);
+        z-index: -1;
+      }
+
+      .faq .container-sm {
+        position: relative;
+        z-index: 1;
+      }
+
+      .faq .faq-group {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+      }
+
+      .faq .faq-group .faq-group-header {
+        padding: 20px 0;
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      .faq .faq-group .faq-group-header h4 {
+        font-weight: 600;
+        width: 95%;
+      }
+
+      .faq .faq-group .faq-group-header i {
+        position: absolute;
+        left: 0;
+        top: 35px;
+        font-size: 1.3rem;
+        cursor: pointer;
+      }
+
+      .faq .faq-group .faq-group-body {
+        display: none;
+      }
+
+      .faq .faq-group .faq-group-body.open {
+        display: block;
+      }
+
+      .faq ul.faq-menu {
+        max-width: 400px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #ddd;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .faq ul.faq-menu li {
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .faq ul.faq-menu li.active {
+        background: var(--primary-color);
+        color: #fff;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 60px 0 30px;
+      }
+
+      .footer h4 {
+        margin-bottom: 10px;
+      }
+
+      .footer ul li {
+        line-height: 2.5;
+      }
+
+      .footer a {
+        color: #ccc;
+      }
+
+      .footer i {
+        font-size: 1.5rem;
+        margin-left: 10px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .footer .card {
+        margin: 20px 0 30px 30px;
+      }
+
+      .footer input[type='email'] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+
+      /* Utility Classes */
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      .container-sm {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* Card */
+      .card {
+        background: #fff;
+        color: #000;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-block;
+        padding: 13px 20px;
+        background: var(--light-color);
+        color: #333;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: center;
+        transition: 0.5s;
+      }
+
+      .btn:hover {
+        opacity: 0.8;
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: var(--primary-color);
+        color: #fff;
+      }
+
+      .btn-gold {
+        background: var(--gold-color);
+        color: #333;
+        font-weight: bold;
+      }
+
+      .btn-dark {
+        background: var(--dark-color);
+        color: #fff;
+      }
+
+      .btn-block {
+        display: block;
+        width: 100%;
+      }
+
+      /* Text Classes */
+      .text-xxl {
+        font-size: 3rem;
+        line-height: 1.2;
+        font-weight: 600;
+        margin: 40px 0 20px;
+      }
+
+      .text-xl {
+        font-size: 2.2rem;
+        line-height: 1.4;
+        font-weight: normal;
+        margin: 40px 0 20px;
+      }
+
+      .text-lg {
+        font-size: 1.8rem;
+        line-height: 1.4;
+        font-weight: normal;
+        margin: 30px 0 20px;
+      }
+
+      .text-md {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        font-weight: normal;
+        margin: 20px 0 10px;
+      }
+
+      .text-sm {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        font-weight: normal;
+        margin: 10px 0 5px;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      /* Background */
+      .bg-primary {
+        background: var(--primary-color);
+        color: #fff;
+      }
+
+      .bg-light {
+        background: var(--light-color);
+        color: #333;
+      }
+
+      .bg-dark {
+        background: var(--dark-color);
+        color: #fff;
+      }
+
+      .bg-black {
+        background: #000;
+        color: #fff;
+      }
+
+      /* Hamburger Button */
+      .hamburger-button {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1000;
+      }
+
+      .hamburger-button .hamburger-line {
+        width: 30px;
+        height: 3px;
+        background: #333;
+        margin: 6px 0;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 250px;
+        height: 100%;
+        z-index: 100;
+        background: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        transition: left 0.3s ease-in-out;
+      }
+
+      .mobile-menu.active {
+        left: 0;
+      }
+
+      .mobile-menu ul {
+        margin-top: 100px;
+        padding-left: 10px;
+      }
+
+      .mobile-menu ul li {
+        margin: 10px 0;
+      }
+
+      .mobile-menu ul li a {
+        font-size: 20px;
+        transition: 0.3s;
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .modal-header h2 {
+        margin: 0;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .password-input {
+        position: relative;
+      }
+
+      .toggle-password {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #666;
+      }
+
+      .form-footer {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .form-footer a {
+        color: var(--primary-color);
+        cursor: pointer;
+      }
+
+      /* User Info */
+      .user-info {
+        display: none;
+        align-items: center;
+      }
+
+      .user-info.active {
+        display: flex;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        font-weight: bold;
+        position: relative;
+        transition: all 0.3s;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .user-avatar.premium {
+        background: linear-gradient(45deg, #FFD700, #FFA500);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      }
+
+      .user-avatar.verified {
+        border: 2px solid var(--success-color);
+      }
+
+      .user-avatar.verified::after {
+        content: '✓';
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+        background: var(--success-color);
+        color: white;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Premium Badge */
+      .premium-badge {
+        display: inline-flex;
+        align-items: center;
+        background: linear-gradient(45deg, #FFD700, #FFA500);
+        color: #333;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-right: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+
+      .verified-badge {
+        display: inline-flex;
+        align-items: center;
+        background: var(--success-color);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        margin-right: 8px;
+      }
+
+      /* Message Counter */
+      .message-counter {
+        background: var(--primary-color);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .message-counter.low {
+        background: var(--warning-color);
+      }
+
+      .message-counter.critical {
+        background: var(--danger-color);
+      }
+
+      /* Verification Notice */
+      .verification-notice {
+        background: var(--warning-color);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin: 10px 0;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      .verification-notice a {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /* Success Alert */
+      .alert-success {
+        background: var(--success-color);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        text-align: center;
+      }
+
+      /* Media Queries */
+      @media (max-width: 960px) {
+        .text-xxl {
+          font-size: 2.5rem;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            font-size: 16px;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        body {
-            background-color: var(--primary-bg);
-            color: var(--primary-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .ios-glass {
-            background: var(--glass-bg);
-            backdrop-filter: var(--blur-intensity);
-            -webkit-backdrop-filter: var(--blur-intensity);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes slideInFromRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInFromLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px rgba(10, 132, 255, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(10, 132, 255, 0.8); }
-            100% { box-shadow: 0 0 5px rgba(10, 132, 255, 0.5); }
-        }
-
-        .animate-fade { animation: fadeIn 0.6s ease-out; }
-        .animate-scale { animation: scaleIn 0.4s ease-out; }
-        .animate-slide-right { animation: slideInFromRight 0.5s ease-out; }
-        .animate-slide-left { animation: slideInFromLeft 0.5s ease-out; }
-        .animate-pulse { animation: pulse 2s infinite; }
-        .animate-float { animation: float 3s ease-in-out infinite; }
-        .animate-glow { animation: glow 2s ease-in-out infinite; }
-
-        .ios-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-blue);
-            color: white;
-            padding: 14px 24px;
-            border-radius: var(--element-radius);
-            font-weight: 600;
-            font-size: 17px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            gap: 8px;
-        }
-
-        .ios-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .ios-btn:hover::before {
-            left: 100%;
-        }
-
-        .ios-btn:active {
-            transform: scale(0.96);
-        }
-
-        .ios-btn-primary {
-            background: var(--accent-blue);
-        }
-
-        .ios-btn-secondary {
-            background: var(--tertiary-bg);
-            color: var(--primary-text);
-        }
-
-        .ios-btn-outline {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--primary-text);
-        }
-
-        .ios-btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .ios-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--tertiary-bg);
-            transition: all 0.3s ease;
-            font-size: 20px;
-        }
-
-        .ios-icon:hover {
-            transform: scale(1.1);
-            background: var(--accent-blue);
-        }
-
-        header {
-            background: var(--glass-bg);
-            backdrop-filter: var(--blur-intensity);
-            -webkit-backdrop-filter: var(--blur-intensity);
-            border-bottom: 1px solid var(--glass-border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--primary-text);
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            font-size: 16px;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-blue);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .language-switcher {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 8px 12px;
-            border-radius: var(--element-radius);
-            transition: all 0.3s;
-            background: var(--tertiary-bg);
-        }
-
-        .language-switcher:hover {
-            background: var(--accent-blue);
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--primary-text);
-            width: 44px;
-            height: 44px;
-            border-radius: var(--element-radius);
-            align-items: center;
-            justify-content: center;
-            background: var(--tertiary-bg);
-        }
-
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.4;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(10,132,255,0.2) 100%);
-            z-index: -1;
-        }
-
-        .hero-container {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            width: 100%;
-        }
-
-        .hero-content {
-            flex: 1;
-            z-index: 2;
-        }
-
-        .hero-image {
-            flex: 1;
-            text-align: center;
-            z-index: 2;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            border-radius: var(--card-radius);
-            box-shadow: var(--shadow);
-            animation: fadeIn 1s ease-out;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            margin-bottom: 24px;
-            font-weight: 700;
-            line-height: 1.1;
-            background: linear-gradient(135deg, var(--primary-text), var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--secondary-text);
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-
-        .ai-section {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-bg);
-            z-index: 2000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .ai-section.active {
-            display: flex;
-        }
-
-        .ai-container {
-            display: flex;
-            height: 100vh;
-            width: 100%;
-        }
-
-        .ai-chat-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: var(--secondary-bg);
-            position: relative;
-        }
-
-        .ai-chat-header {
-            padding: 20px;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--glass-bg);
-            backdrop-filter: var(--blur-intensity);
-        }
-
-        .ai-chat-title {
-            font-size: 20px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .ai-chat-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .ai-btn {
-            background: var(--tertiary-bg);
-            border: none;
-            color: var(--primary-text);
-            width: 44px;
-            height: 44px;
-            border-radius: var(--element-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 18px;
-        }
-
-        .ai-btn:hover {
-            background: var(--accent-blue);
-            transform: scale(1.05);
-        }
-
-        .ai-chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .message {
-            max-width: 70%;
-            padding: 16px;
-            border-radius: 18px;
-            position: relative;
-            animation: fadeIn 0.4s ease-out;
-            line-height: 1.5;
-        }
-
-        .user-message {
-            align-self: flex-end;
-            background: var(--accent-blue);
-            color: white;
-            border-bottom-right-radius: 6px;
-        }
-
-        .ai-message {
-            align-self: flex-start;
-            background: var(--tertiary-bg);
-            color: var(--primary-text);
-            border-bottom-left-radius: 6px;
-        }
-
-        .message-time {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-top: 8px;
-            text-align: right;
-        }
-
-        .ai-loading {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px;
-            background: var(--tertiary-bg);
-            border-radius: 18px;
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-            max-width: 120px;
-        }
-
-        .loading-dots {
-            display: flex;
-            gap: 5px;
-        }
-
-        .loading-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-blue);
-            animation: bounce 1.4s infinite ease-in-out;
-        }
-
-        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
-        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
-
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
-        }
-
-        .ai-chat-input-container {
-            padding: 20px;
-            border-top: 1px solid var(--glass-border);
-            display: flex;
-            gap: 12px;
-            align-items: flex-end;
-            background: var(--glass-bg);
-        }
-
-        .ai-chat-input {
-            flex: 1;
-            padding: 16px 20px;
-            border: 1px solid var(--glass-border);
-            border-radius: var(--element-radius);
-            font-size: 16px;
-            background: var(--tertiary-bg);
-            color: var(--primary-text);
-            resize: none;
-            max-height: 120px;
-            min-height: 50px;
-            transition: all 0.3s ease;
-        }
-
-        .ai-chat-input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2);
-        }
-
-        .ai-send-btn {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: var(--element-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 18px;
-        }
-
-        .ai-send-btn:hover:not(:disabled) {
-            background: var(--accent-blue);
-            transform: scale(1.05);
-        }
-
-        .ai-send-btn:disabled {
-            background: var(--tertiary-bg);
-            cursor: not-allowed;
-            transform: none;
-            opacity: 0.5;
-        }
-
-        .ai-sidebar {
-            width: 380px;
-            background: var(--secondary-bg);
-            border-left: 1px solid var(--glass-border);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            position: relative;
-        }
-
-        .ai-sidebar.hidden {
-            transform: translateX(100%);
-        }
-
-        .ai-sidebar-header {
-            padding: 20px;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--glass-bg);
-        }
-
-        .ai-sidebar-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .ai-sidebar-close {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: var(--primary-text);
-            width: 44px;
-            height: 44px;
-            border-radius: var(--element-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .ai-sidebar-close:hover {
-            background: var(--tertiary-bg);
-        }
-
-        .ai-user-info {
-            padding: 24px 20px;
-            border-bottom: 1px solid var(--glass-border);
-            text-align: center;
-        }
-
-        .ai-user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-            margin: 0 auto 16px;
-        }
-
-        .ai-user-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .ai-user-email {
-            color: var(--secondary-text);
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-
-        .ai-message-count {
-            background: var(--tertiary-bg);
-            padding: 12px 16px;
-            border-radius: var(--element-radius);
-            font-size: 14px;
-        }
-
-        .ai-conversations {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .ai-conversation-item {
-            padding: 16px;
-            border-radius: var(--element-radius);
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-            background: var(--tertiary-bg);
-        }
-
-        .ai-conversation-item:hover {
-            background: var(--glass-bg);
-            border-color: var(--accent-blue);
-        }
-
-        .ai-conversation-item.active {
-            background: var(--glass-bg);
-            border-color: var(--accent-blue);
-        }
-
-        .ai-conversation-title {
-            font-weight: 500;
-            margin-bottom: 6px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .ai-conversation-preview {
-            font-size: 14px;
-            color: var(--secondary-text);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .ai-quick-questions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            padding: 20px;
-        }
-
-        .ai-quick-question {
-            padding: 12px 16px;
-            background: var(--tertiary-bg);
-            border-radius: var(--element-radius);
-            text-align: center;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid transparent;
-        }
-
-        .ai-quick-question:hover {
-            background: var(--glass-bg);
-            border-color: var(--accent-blue);
-        }
-
-        /* تحسينات كروت المميزات */
-        .features {
-            padding: 100px 0;
-            background: var(--secondary-bg);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .section-title h2 {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            margin-bottom: 16px;
-            font-weight: 700;
-        }
-
-        .section-title p {
-            font-size: clamp(1rem, 2vw, 1.125rem);
-            color: var(--secondary-text);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: var(--glass-bg);
-            backdrop-filter: var(--blur-intensity);
-            border-radius: var(--card-radius);
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            border: 1px solid var(--glass-border);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-blue);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            color: white;
-            font-size: 32px;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-icon::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
-            animation: glow 2s infinite;
-        }
-
-        .feature-card:hover .feature-icon::after {
-            left: 100%;
-        }
-
-        .feature-card h3 {
-            font-size: 20px;
-            margin-bottom: 16px;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .feature-card:hover h3 {
-            color: var(--accent-blue);
-        }
-
-        .feature-card p {
-            color: var(--secondary-text);
-            font-size: 16px;
-            line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-
-        .feature-card:hover p {
-            color: var(--primary-text);
-        }
-
-        /* تحسينات قسم التطبيقات */
-        .apps {
-            padding: 100px 0;
-            background: var(--primary-bg);
-        }
-
-        .apps-container {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .apps-content {
-            flex: 1;
-        }
-
-        .apps-image {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-
-        .apps-image img {
-            max-width: 100%;
-            border-radius: var(--card-radius);
-            box-shadow: var(--shadow);
-        }
-
-        .app-unavailable {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, var(--tertiary-bg), var(--secondary-bg));
-            border-radius: var(--card-radius);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary-text);
-            font-size: 24px;
-            font-weight: bold;
-            position: relative;
-            overflow: hidden;
-            border: 2px dashed var(--glass-border);
-        }
-
-        .app-unavailable::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(10, 132, 255, 0.1) 10px,
-                rgba(10, 132, 255, 0.1) 20px
-            );
-            animation: slide 3s linear infinite;
-        }
-
-        @keyframes slide {
-            0% { transform: translateX(-20px); }
-            100% { transform: translateX(0); }
-        }
-
-        .app-unavailable i {
-            font-size: 64px;
-            margin-bottom: 20px;
-            color: var(--accent-blue);
-            animation: pulse 2s infinite;
-        }
-
-        .app-unavailable span {
-            font-size: 18px;
-            color: var(--accent-blue);
-            margin-top: 10px;
-        }
-
-        .apps-buttons {
-            display: flex;
-            gap: 16px;
-            margin-top: 32px;
-            flex-wrap: wrap;
-        }
-
-        .app-btn {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--tertiary-bg);
-            color: var(--primary-text);
-            padding: 16px 24px;
-            border-radius: var(--element-radius);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid var(--glass-border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .app-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .app-btn:hover::before {
-            left: 100%;
-        }
-
-        .app-btn:hover {
-            transform: translateY(-3px);
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-        }
-
-        .app-btn i {
-            font-size: 24px;
-        }
-
-        .community {
-            padding: 100px 0;
-            background: var(--secondary-bg);
-            text-align: center;
-        }
-
-        .community-stats {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin: 60px 0;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .stat-number {
-            font-size: clamp(2.5rem, 5vw, 3.25rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
-        }
-
-        .stat-label {
-            font-size: 18px;
-            color: var(--secondary-text);
-        }
-
-        footer {
-            background: var(--secondary-bg);
-            color: var(--primary-text);
-            padding: 80px 0 20px;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 20px;
-            margin-bottom: 24px;
-            color: var(--accent-blue);
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: var(--secondary-text);
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: var(--tertiary-bg);
-            border-radius: var(--element-radius);
-            color: var(--primary-text);
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--accent-blue);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 24px;
-            border-top: 1px solid var(--glass-border);
-            color: var(--secondary-text);
-            font-size: 14px;
-        }
-
-        .auth-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .auth-container {
-            background: var(--secondary-bg);
-            border-radius: var(--card-radius);
-            width: 90%;
-            max-width: 450px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            animation: scaleIn 0.4s ease-out;
-            border: 1px solid var(--glass-border);
-        }
-
-        .auth-header {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            color: white;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-        }
-
-        .auth-header h2 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .auth-header p {
-            opacity: 0.9;
-            font-size: 14px;
-        }
-
-        .close-auth {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: var(--element-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-auth:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .auth-body {
-            padding: 30px;
-        }
-
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .auth-tab {
-            flex: 1;
-            text-align: center;
-            padding: 12px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-            color: var(--secondary-text);
-        }
-
-        .auth-tab.active {
-            color: var(--accent-blue);
-            border-bottom-color: var(--accent-blue);
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--primary-text);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--glass-border);
-            border-radius: var(--element-radius);
-            font-size: 16px;
-            transition: all 0.3s;
-            background: var(--tertiary-bg);
-            color: var(--primary-text);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2);
-        }
-
-        .password-toggle {
-            position: absolute;
-            left: 15px;
-            top: 40px;
-            background: none;
-            border: none;
-            color: var(--secondary-text);
-            cursor: pointer;
-        }
-
-        .auth-submit {
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .auth-footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: var(--secondary-text);
-        }
-
-        .auth-footer a {
-            color: var(--accent-blue);
-            font-weight: 500;
-        }
-
-        .auth-message {
-            padding: 10px 15px;
-            border-radius: var(--element-radius);
-            margin-bottom: 20px;
-            font-size: 14px;
-            display: none;
-        }
-
-        .auth-message.success {
-            background: rgba(48, 209, 88, 0.1);
-            color: var(--accent-green);
-            border: 1px solid rgba(48, 209, 88, 0.2);
-            display: block;
-        }
-
-        .auth-message.error {
-            background: rgba(255, 69, 58, 0.1);
-            color: var(--accent-red);
-            border: 1px solid rgba(255, 69, 58, 0.2);
-            display: block;
-        }
-
-        .user-profile {
-            display: none;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        .user-name {
-            font-weight: 500;
-        }
-
-        .user-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--secondary-bg);
-            border-radius: var(--element-radius);
-            box-shadow: var(--shadow);
-            padding: 10px 0;
-            width: 180px;
-            z-index: 100;
-            margin-top: 10px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .user-dropdown.show {
-            display: block;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .user-dropdown a {
-            display: block;
-            padding: 10px 20px;
-            transition: all 0.3s;
-            color: var(--primary-text);
-        }
-
-        .user-dropdown a:hover {
-            background: var(--tertiary-bg);
-            color: var(--accent-blue);
-        }
-
-        .ai-subscription-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--secondary-bg);
-            border-radius: var(--card-radius);
-            width: 90%;
-            max-width: 500px;
-            box-shadow: var(--shadow);
-            z-index: 2001;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-        }
-
-        .ai-subscription-modal.active {
-            display: block;
-            animation: scaleIn 0.4s ease-out;
-        }
-
-        .ai-subscription-header {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .ai-subscription-body {
-            padding: 30px;
-        }
-
-        .ai-subscription-plans {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .ai-subscription-plan {
-            padding: 20px;
-            border: 2px solid var(--glass-border);
-            border-radius: var(--element-radius);
-            cursor: pointer;
-            transition: all 0.3s;
-            background: var(--tertiary-bg);
-        }
-
-        .ai-subscription-plan:hover {
-            border-color: var(--accent-blue);
-        }
-
-        .ai-subscription-plan.selected {
-            border-color: var(--accent-blue);
-            background: rgba(10, 132, 255, 0.1);
-        }
-
-        .ai-plan-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .ai-plan-price {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--accent-blue);
-            margin-bottom: 10px;
-        }
-
-        .ai-plan-features {
-            font-size: 14px;
-            color: var(--secondary-text);
-        }
-
-        .ai-code-input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid var(--glass-border);
-            border-radius: var(--element-radius);
-            font-size: 16px;
-            margin-bottom: 20px;
-            background: var(--tertiary-bg);
-            color: var(--primary-text);
-        }
-
-        .ai-code-input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2);
-        }
-
-        .ai-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1999;
-        }
-
-        .ai-overlay.active {
-            display: block;
-        }
-
-        /* تحسينات التجاوب للهواتف */
-        @media (max-width: 1200px) {
-            .ai-sidebar {
-                width: 340px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 42px;
-            }
-            
-            .hero-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 40px;
-            }
-            
-            .apps-container {
-                flex-direction: column;
-                gap: 40px;
-            }
-            
-            .ai-container {
-                flex-direction: column;
-            }
-            
-            .ai-sidebar {
-                width: 100%;
-                height: 50vh;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                border-left: none;
-                border-top: 1px solid var(--glass-border);
-            }
-            
-            .ai-sidebar.hidden {
-                transform: translateY(100%);
-            }
-
-            .ai-quick-questions {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links:not(.mobile-open) {
-                display: none;
-            }
-            
-            .nav-links.mobile-open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--glass-bg);
-                backdrop-filter: var(--blur-intensity);
-                padding: 20px;
-                border-radius: 0 0 var(--card-radius) var(--card-radius);
-                z-index: 100;
-                gap: 16px;
-            }
-            
-            .menu-toggle {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .community-stats {
-                flex-direction: column;
-                gap: 40px;
-            }
-            
-            .apps-buttons {
-                flex-direction: column;
-            }
-            
-            .message {
-                max-width: 85%;
-            }
-
-            .section-title h2 {
-                font-size: 32px;
-            }
-
-            .feature-card {
-                padding: 30px 20px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero {
-                padding: 80px 0;
-            }
-            
-            .features, .apps, .community {
-                padding: 80px 0;
-            }
-            
-            .feature-card {
-                padding: 30px 20px;
-            }
-
-            .stat-number {
-                font-size: 42px;
-            }
-
-            .container {
-                padding: 0 15px;
-            }
-
-            .ai-chat-input-container {
-                padding: 15px;
-            }
-
-            .ai-chat-messages {
-                padding: 15px;
-            }
-
-            .hero-buttons .ios-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .logo span {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 28px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .feature-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <div class="logo-icon">G</div>
-                    <span>GEAR AI</span>
-                </a>
-                
-                <ul class="nav-links">
-                    <li><a href="#" data-i18n="home">الرئيسية</a></li>
-                    <li><a href="#" data-i18n="features">الميزات</a></li>
-                    <li><a href="#" data-i18n="apps">التطبيقات</a></li>
-                    <div class="language-switcher" id="languageSwitcher">
-                        <i class="fas fa-globe"></i>
-                        <span data-i18n="language">العربية</span>
-                    </div>
-                    <div class="auth-buttons">
-                        <a href="#" class="ios-btn ios-btn-outline login-btn" data-i18n="login">تسجيل الدخول</a>
-                        <a href="#" class="ios-btn ios-btn-primary register-btn" data-i18n="getStarted">ابدأ الآن</a>
-                    </div>
-                </ul>
-                
-                <div class="nav-actions">
-                    <div class="user-profile">
-                        <div class="user-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <span class="user-name" data-i18n="user">مستخدم</span>
-                        <div class="user-dropdown">
-                            <a href="#" class="profile-link" data-i18n="profile">الملف الشخصي</a>
-                            <a href="#" class="logout-link" data-i18n="logout">تسجيل الخروج</a>
-                        </div>
-                    </div>
-                    <button class="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="hero-video-bg">
-            <!-- سيتم إنشاء خلفية متحركة بالكود -->
-        </div>
         
-        <div class="container">
-            <div class="hero-container">
-                <div class="hero-content animate-slide-left">
-                    <h1 data-i18n="heroTitle">تجربة محادثة ذكية مع GEAR AI</h1>
-                    <p data-i18n="heroSubtitle">ذكاء اصطناعي بنموذج عالي يساعد في المهام اليومية وإنشاء الأكواد البرمجية GEAR AI V1</p>
-                    
-                    <div class="hero-buttons">
-                        <a href="#" class="ios-btn ios-btn-primary start-chat-btn" data-i18n="getStartedFree">ابدأ مجاناً</a>
-                        <a href="#" class="ios-btn ios-btn-outline" data-i18n="learnMore">تعرف أكثر</a>
-                    </div>
-                </div>
-                
-                <div class="hero-image animate-slide-right">
-                    <div style="width: 100%; max-width: 500px; height: 400px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-green)); border-radius: var(--card-radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; margin: 0 auto;">
-                        GEAR AI Interface
-                    </div>
-                </div>
-            </div>
+        .hero-heading {
+          font-size: 2.8rem;
+        }
+      }
+
+      @media (max-width: 720px) and (max-height: 1600px) {
+        body {
+          font-size: 18px;
+        }
+        
+        .hero {
+          height: 70vh;
+          margin-top: 70px;
+        }
+        
+        .hero-heading {
+          font-size: 2.5rem;
+        }
+        
+        .hero-text {
+          font-size: 1.1rem;
+        }
+        
+        .container, .container-sm {
+          padding: 0 20px;
+        }
+        
+        .text-xxl {
+          font-size: 2.2rem;
+        }
+        
+        .text-xl {
+          font-size: 1.9rem;
+        }
+        
+        .btn {
+          padding: 15px 25px;
+          font-size: 1.1rem;
+        }
+      }
+
+      @media (max-width: 670px) {
+        .navbar .main-menu {
+          display: none;
+        }
+
+        .navbar .hamburger-button {
+          display: block;
+        }
+
+        .hero .hero-content,
+        .hero .hero-text {
+          width: 100%;
+          text-align: center;
+        }
+
+        .hero .hero-buttons .btn {
+          margin-bottom: 10px;
+          display: block;
+          width: 100%;
+        }
+
+        .testimonials .testimonials-heading {
+          max-width: 100%;
+          text-align: center;
+        }
+
+        .testimonials .testimonials-grid,
+        .pricing .pricing-grid,
+        .footer .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer .card {
+          margin-left: 0;
+        }
+
+        .footer .footer-grid > div {
+          text-align: center;
+        }
+
+        /* Text */
+        .text-xl {
+          font-size: 1.9rem;
+        }
+
+        .text-lg {
+          font-size: 1.5rem;
+        }
+
+        .text-md {
+          font-size: 1.1rem;
+        }
+        
+        .hero-heading {
+          font-size: 2.2rem;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .text-xxl {
+          font-size: 2rem;
+        }
+        
+        .hero-heading {
+          font-size: 1.8rem;
+        }
+      }
+
+      /* Animations */
+      @keyframes glow {
+        0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.7); }
+        50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.9); }
+        100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.7); }
+      }
+
+      .gold-glow {
+        animation: glow 2s infinite;
+      }
+    </style>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <!-- Modal for Login/Signup -->
+    <div class="modal" id="authModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">تسجيل الدخول</h2>
+          <button class="close-modal">&times;</button>
         </div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">البريد الإلكتروني</label>
+            <input type="email" id="loginEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">كلمة المرور</label>
+            <div class="password-input">
+              <input type="password" id="loginPassword" required />
+              <button type="button" class="toggle-password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">تسجيل الدخول</button>
+          <div class="form-footer">
+            <p>ليس لديك حساب؟ <a id="switchToSignup">إنشاء حساب</a></p>
+          </div>
+        </form>
+
+        <form id="signupForm" style="display: none">
+          <div class="form-group">
+            <label for="signupUsername">اسم المستخدم</label>
+            <input type="text" id="signupUsername" required />
+          </div>
+          <div class="form-group">
+            <label for="signupEmail">البريد الإلكتروني</label>
+            <input type="email" id="signupEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="signupPassword">كلمة المرور</label>
+            <div class="password-input">
+              <input type="password" id="signupPassword" required />
+              <button type="button" class="toggle-password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">تأكيد كلمة المرور</label>
+            <div class="password-input">
+              <input type="password" id="confirmPassword" required />
+              <button type="button" class="toggle-password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">إنشاء حساب</button>
+          <div class="form-footer">
+            <p>لديك حساب بالفعل؟ <a id="switchToLogin">تسجيل الدخول</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html">
+             <h1>GEAR AI</h1>
+          </a>
+        </div>
+
+        <div class="main-menu">
+          <ul>
+            <li>
+              <a href="gear.html">التحدث مع GEAR</a>
+            </li>
+            <li>
+              <a href="#pricing">الاشتراكات</a>
+            </li>
+            <li>
+              <a class="btn" href="#" id="loginBtn"> 
+                <i class="fas fa-user"></i> تسجيل الدخول 
+              </a>
+            </li>
+            <li class="user-info" id="userInfo">
+              <div class="message-counter" id="messageCounter">0 رسالة</div>
+              <div class="user-avatar" id="userAvatar"></div>
+              <span id="userName"></span>
+              <div id="userMessages" style="margin-right: 10px; background: var(--primary-color); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;"></div>
+              <a class="btn" href="#" id="logoutBtn" style="margin-right: 10px;"> 
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج 
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Hamburger Button -->
+        <button class="hamburger-button">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </button>
+        <div class="mobile-menu">
+          <ul>
+            <li>
+              <a href="gear.html">التحدث مع GEAR</a>
+            </li>
+            <li>
+              <a href="#pricing">الاشتراكات</a>
+            </li>
+            <li>
+              <a class="btn" href="#" id="mobileLoginBtn"> 
+                <i class="fas fa-user"></i> تسجيل الدخول 
+              </a>
+            </li>
+            <li class="user-info" id="mobileUserInfo" style="display: none">
+              <div class="message-counter" id="mobileMessageCounter">0 رسالة</div>
+              <div class="user-avatar" id="mobileUserAvatar"></div>
+              <span id="mobileUserName"></span>
+              <div id="mobileUserMessages" style="margin-right: 10px; background: var(--primary-color); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;"></div>
+              <a class="btn" href="#" id="mobileLogoutBtn" style="margin-top: 10px;"> 
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج 
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero">
+      <video autoplay muted loop class="hero-video">
+        <source src="HERO.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+      <div class="hero-content">
+        <h1 class="hero-heading animate__animated animate__fadeInDown">
+          GEAR AI - مستقبل الذكاء الاصطناعي بين يديك
+        </h1>
+        <p class="hero-text animate__animated animate__fadeInUp">
+          اكتشف قوة الذكاء الاصطناعي المتطور الذي يغير طريقة عملك وحياتك. حلول ذكية، إبداعية، وفعالة.
+        </p>
+        <div class="hero-buttons animate__animated animate__fadeInUp">
+          <a href="gear.html" class="btn btn-primary">ابدأ المحادثة الآن</a>
+        </div>
+      </div>
     </section>
 
-    <section class="ai-section" id="aiSection">
-        <div class="ai-container">
-            <div class="ai-chat-container">
-                <div class="ai-chat-header">
-                    <div class="ai-chat-title">
-                        <i class="fas fa-robot"></i>
-                        GEAR
-                    </div>
-                    <div class="ai-chat-actions">
-                        <button class="ai-btn" id="aiNewChat" title="محادثة جديدة">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <button class="ai-btn" id="aiToggleSidebar" title="القائمة الجانبية">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <button class="ai-btn" id="aiCloseChat" title="إغلاق المحادثة">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="ai-chat-messages" id="aiChatMessages">
-                    <div class="ai-quick-questions" id="aiQuickQuestions">
-                        <div class="ai-quick-question" data-question="ما هو الذكاء الاصطناعي؟">ما هو الذكاء الاصطناعي؟</div>
-                        <div class="ai-quick-question" data-question="كيف يمكنني تحسين مهاراتي البرمجية؟">كيف يمكنني تحسين مهاراتي البرمجية؟</div>
-                        <div class="ai-quick-question" data-question="ما هي أحدث تقنيات الويب؟">ما هي أحدث تقنيات الويب؟</div>
-                        <div class="ai-quick-question" data-question="كيف أبدأ في تعلم البرمجة؟">كيف أبدأ في تعلم البرمجة؟</div>
-                    </div>
-                </div>
-                
-                <div class="ai-chat-input-container">
-                    <textarea class="ai-chat-input" id="aiChatInput" placeholder="اكتب رسالتك هنا..." rows="1"></textarea>
-                    <button class="ai-send-btn" id="aiSendBtn">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="ai-sidebar hidden" id="aiSidebar">
-                <div class="ai-sidebar-header">
-                    <div class="ai-sidebar-title">المحادثات</div>
-                    <button class="ai-sidebar-close" id="aiSidebarClose">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-                <div class="ai-user-info">
-                    <div class="ai-user-avatar" id="aiUserAvatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="ai-user-name" id="aiUserName">مستخدم</div>
-                    <div class="ai-user-email" id="aiUserEmail">user@example.com</div>
-                    <div class="ai-message-count" id="aiMessageCount">
-                        الرسائل المتبقية: <span id="remainingMessages">100</span>/100
-                    </div>
-                </div>
-                
-                <div class="ai-conversations" id="aiConversations">
-                    <!-- المحادثات ستظهر هنا -->
-                </div>
-            </div>
+    <!-- Video/Promo Code Section -->
+    <section class="video-section" id="about">
+      <video autoplay muted loop class="video-section-bg">
+        <source src="2section.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+      <div class="container">
+        <div class="video-section-content">
+          <h2 class="video-section-heading text-xl">
+            هل لديك كود اشتراك؟ ادخله الآن واستمتع باشتراكك المميز في GEAR AI
+          </h2>
+          <div class="promo-code-container">
+            <div id="promoCodeAlert"></div>
+            <form class="promo-code-form" id="promoCodeForm">
+              <input type="text" class="promo-code-input" id="promoCode" placeholder="أدخل كود الاشتراك هنا" required>
+              <button type="submit" class="btn btn-primary btn-block">تفعيل الكود</button>
+            </form>
+            <p class="text-center" style="margin-top: 20px;">
+              ليس لديك كود اشتراك؟ 
+              <button class="get-code-btn" id="getCodeBtn">اشترك الآن واحصل عليه</button>
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section class="features">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="featuresTitle">ميزات GEAR AI</h2>
-                <p data-i18n="featuresSubtitle">اكتشف مجموعة الميزات المتقدمة التي تجعل GEAR AI الأفضل في فئته</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card animate-fade">
-                    <div class="feature-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3 data-i18n="feature1Title">محادثات طبيعية</h3>
-                    <p data-i18n="feature1Desc">تجربة محادثة طبيعية وسلسة تشبه التحدث مع إنسان حقيقي</p>
-                </div>
-                
-                <div class="feature-card animate-fade" style="animation-delay: 0.1s;">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 data-i18n="feature2Title">ذكاء متقدم</h3>
-                    <p data-i18n="feature2Desc">تقنية ذكاء اصطناعي متطورة لفهم أعمق للسياق والنوايا</p>
-                </div>
-                
-                <div class="feature-card animate-fade" style="animation-delay: 0.2s;">
-                    <div class="feature-icon">
-                        <i class="fas fa-language"></i>
-                    </div>
-                    <h3 data-i18n="feature3Title">دعم متعدد اللغات</h3>
-                    <p data-i18n="feature3Desc">دعم للعديد من اللغات بما فيها العربية بطلاقة تامة</p>
-                </div>
-                
-                <div class="feature-card animate-fade" style="animation-delay: 0.3s;">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 data-i18n="feature4Title">آمن وخاص</h3>
-                    <p data-i18n="feature4Desc">حماية كاملة لبياناتك وخصوصية محادثاتك</p>
-                </div>
-                
-                <div class="feature-card animate-fade" style="animation-delay: 0.4s;">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3 data-i18n="feature5Title">استجابة سريعة</h3>
-                    <p data-i18n="feature5Desc">استجابة فورية دون تأخير يذكر في جميع المحادثات</p>
-                </div>
-                
-                <div class="feature-card animate-fade" style="animation-delay: 0.5s;">
-                    <div class="feature-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3 data-i18n="feature6Title">تحديثات مستمرة</h3>
-                    <p data-i18n="feature6Desc">تحسينات وتحديثات مستمرة لتحسين تجربة المستخدم</p>
-                </div>
-            </div>
+    <!-- Testimonials -->
+    <section class="testimonials bg-light">
+      <video autoplay muted loop class="testimonials-bg">
+        <source src="2section.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+      <div class="container">
+        <h3 class="testimonials-heading text-xl text-center">
+         ماهو GEAR AI 
+        </h3>
+        <div class="testimonials-grid">
+          <div class="card">
+            <p>
+              هو شات مع ذكاء اصطناعى يعمل من خلال اكثر من موديل مثل ( CHATGPT , DEEPSEEK , GEMINI )
+            </p>
+            <p> موديلات الذكاء الاصطناعى</p>
+          </div>
+
+          <div class="card">
+            <p>
+              اهم الاستخدامات لهذا الذكاء الاصطناعى هى تسهيل الحياة اليومية والاجابة عن اسئلة عندك بدون اى اخطاء او تاخير 
+            </p>
+          </div>
+
+          <div class="card">
+            <p>
+              يمكن استخدامه فى كتابت الاكواد البرمجية مثل تصميم مواقع ويب او تطبيقات هاتف وتسهيل الطريق للتعلم
+            </p>
+            <p>مطور برمجيات</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section class="apps">
-        <div class="container">
-            <div class="apps-container">
-                <div class="apps-content">
-                    <div class="section-title" style="text-align: right;">
-                        <h2 data-i18n="appsTitle">حمّل تطبيق GEAR AI</h2>
-                        <p data-i18n="appsSubtitle">احمل التطبيق على هاتفك واستمتع بتجربة GEAR AI أينما كنت</p>
-                    </div>
-                    
-                    <div class="apps-buttons">
-                        <a href="#" class="app-btn">
-                            <i class="fab fa-apple"></i>
-                            <div>
-                                <span style="font-size: 12px;" data-i18n="downloadFrom">حمّل من</span>
-                                <span style="font-weight: bold;">App Store</span>
-                            </div>
-                        </a>
-                        
-                        <a href="#" class="app-btn">
-                            <i class="fab fa-google-play"></i>
-                            <div>
-                                <span style="font-size: 12px;" data-i18n="downloadFrom">حمّل من</span>
-                                <span style="font-weight: bold;">Google Play</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="apps-image">
-                    <div class="app-unavailable">
-                        <i class="fas fa-mobile-alt"></i>
-                        غير متوفر حالياً
-                        <span>سيتم إطلاقه قريباً</span>
-                    </div>
-                </div>
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+      <video autoplay muted loop class="pricing-bg">
+        <source src="2section.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+      <div class="container-sm">
+        <h3 class="pricing-heading text-xl text-center">اختر خطة GEAR AI المناسبة لك</h3>
+        <p class="pricing-subheading text-md text-center">
+          ابدأ مجانًا وقم بالترقية عندما تكون مستعدًا. حلول ذكية تنمو معك.
+        </p>
+        <div class="pricing-grid">
+          <!-- Pricing Card 1 -->
+          <div class="card pricing-card">
+            <div class="pricing-card-header">
+              <h4 class="pricing-heading text-xl">الطلاب</h4>
+              <p class="pricing-card-subheading">
+                مثالي للطلاب والمتعلمين. استمتع بميزات الذكاء الاصطناعي الأساسية.
+              </p>
+              <div class="pricing-card-price">
+                <span class="text-xl">20 جنيه </span>
+                <span class="pricing-card-period">/شهريًا</span>
+              </div>
             </div>
+            <div class="pricing-card-body">
+              <ul class="pricing-features">
+                <li><i class="fas fa-check"></i> وصول كامل إلى GEAR AI الأساسي</li>
+                <li><i class="fas fa-check"></i> إنشاء محتوى ذكي</li>
+                <li><i class="fas fa-check"></i> 50 رسالة كل يوم </li>
+              </ul>
+              <a href="#" class="btn btn-primary btn-block subscribe-btn" data-plan="الطلاب" data-price="20">اشتراك</a>
+            </div>
+          </div>
+
+          <!-- Pricing Card 2 -->
+          <div class="card pricing-card pricing-card-premium">
+            <div class="pricing-card-popular">
+              <i class="fas fa-crown"></i> الافضل 
+            </div>
+            <div class="pricing-card-header">
+              <h4 class="pricing-card-heading text-xl">المحترف</h4>
+              <p class="pricing-card-subheading">
+                الحل الشامل للمحترفين والشركات. استمتع بكل إمكانيات GEAR AI.
+              </p>
+              <div class="pricing-card-price">
+                <span class="text-xl">250 جنيه</span>
+                <span class="pricing-card-period">/6 شهور</span>
+              </div>
+            </div>
+            <div class="pricing-card-body">
+              <ul class="pricing-features">
+                <li><i class="fas fa-check"></i> بحث عميق</li>
+                <li><i class="fas fa-check"></i> GEAR AI المتقدم مع إمكانيات غير محدودة</li>
+                <li><i class="fas fa-check"></i> رسائل غير محدودة </li>
+              </ul>
+              <a href="#" class="btn btn-gold btn-block subscribe-btn" data-plan="بريميوم" data-price="150">اشتراك</a>
+            </div>
+          </div>
         </div>
+        <p class="pricing-footer text-center">
+          جميع الأسعار بالجنيه المصري. يمكنك التراجع عن الاشتراك في أي وقت.
+        </p>
+      </div>
     </section>
 
-    <section class="community">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="communityTitle">انضم إلى مجتمعنا النشط</h2>
-                <p data-i18n="communitySubtitle">ملايين المستخدمين حول العالم يثقون في GEAR AI لمحادثاتهم اليومية</p>
+    <!-- Footer -->
+    <footer class="footer bg-black">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a> 
+              <a href="tel:+201148179176"><i class="fab fa-whatsapp"></i></a> 
+              <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
-            
-            <div class="community-stats">
-                <div class="stat">
-                    <div class="stat-number">515+</div>
-                    <div class="stat-label" data-i18n="activeUsers">مستخدم نشط</div>
-                </div>
-                
-                <div class="stat">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label" data-i18n="supportedLanguages">لغة مدعومة</div>
-                </div>
-                
-                <div class="stat">
-                    <div class="stat-number">98.7%</div>
-                    <div class="stat-label" data-i18n="satisfactionRate">معدل الرضا</div>
-                </div>
-            </div>
-            
-            <a href="#" class="ios-btn ios-btn-primary" data-i18n="joinCommunity">انضم إلى المجتمع</a>
+          </div>
+          <div>
+            <h4>GEAR AI</h4>
+          </div>
+          <div>
+            <!-- Empty div for layout -->
+          </div>
+          <div>
+            <h4>اتصل بنا</h4>
+            <ul>
+              <li>
+                <a href="mailto:support@gear-ai.com">mostafefareg3@G.com</a>
+              </li>
+              <li>
+                <a href="tel:+201148179176">+20 114 817 9176</a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>GEAR AI</h3>
-                    <p data-i18n="footerDesc">منصة محادثة ذكية تستخدم أحدث تقنيات الذكاء الاصطناعي لتقديم تجربة محادثة طبيعية ومفيدة.</p>
-                    
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3 data-i18n="quickLinks">الروابط السريعة</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" data-i18n="home">الرئيسية</a></li>
-                        <li><a href="#" data-i18n="features">الميزات</a></li>
-                        <li><a href="#" data-i18n="apps">التطبيقات</a></li>
-                        <li><a href="#" data-i18n="community">المجتمع</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3 data-i18n="support">الدعم</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" data-i18n="faq">الأسئلة الشائعة</a></li>
-                        <li><a href="#" data-i18n="contact">اتصل بنا</a></li>
-                        <li><a href="#" data-i18n="terms">الشروط والأحكام</a></li>
-                        <li><a href="#" data-i18n="privacy">سياسة الخصوصية</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3 data-i18n="contactUs">اتصل بنا</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-envelope"></i> mostafefareg3@gmail.com</li>
-                        <li><i class="fas fa-phone"></i> 01148179176</li>
-                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="location">المنيا مصر</span></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p data-i18n="copyright">جميع الحقوق محفوظة &copy; 2025 M0S7A5E-GEAR AI</p>
-            </div>
+        <div class="text-center" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #444;">
+          <p>&copy;جميع حقوق الطبع والنشر تذهب الى M0S7A5E - GEAR AI WEBSITE.</p>
         </div>
+      </div>
     </footer>
 
-    <div class="auth-modal" id="authModal">
-        <div class="auth-container">
-            <div class="auth-header">
-                <button class="close-auth">&times;</button>
-                <h2 id="authTitle" data-i18n="welcomeBack">مرحباً بعودتك</h2>
-                <p id="authSubtitle" data-i18n="loginToAccess">سجل الدخول للوصول إلى حسابك</p>
-            </div>
-            <div class="auth-body">
-                <div class="auth-tabs">
-                    <div class="auth-tab active" data-tab="login" data-i18n="login">تسجيل الدخول</div>
-                    <div class="auth-tab" data-tab="register" data-i18n="register">إنشاء حساب</div>
-                </div>
-                
-                <div class="auth-message" id="authMessage"></div>
-                
-                <form class="auth-form active" id="loginForm">
-                    <div class="form-group">
-                        <label for="loginEmail" data-i18n="email">البريد الإلكتروني</label>
-                        <input type="email" id="loginEmail" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword" data-i18n="password">كلمة المرور</label>
-                        <input type="password" id="loginPassword" class="form-control" placeholder="أدخل كلمة المرور" required>
-                        <button type="button" class="password-toggle" id="loginPasswordToggle">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </div>
-                    <button type="submit" class="ios-btn ios-btn-primary auth-submit" data-i18n="login">تسجيل الدخول</button>
-                    <div class="auth-footer">
-                        <a href="#" class="forgot-password" data-i18n="forgotPassword">نسيت كلمة المرور؟</a>
-                    </div>
-                </form>
-                
-                <form class="auth-form" id="registerForm">
-                    <div class="form-group">
-                        <label for="registerName" data-i18n="fullName">الاسم الكامل</label>
-                        <input type="text" id="registerName" class="form-control" placeholder="أدخل اسمك الكامل" required>
-                    </div>
-                   
-                    <div class="form-group">
-                        <label for="registerEmail" data-i18n="email">البريد الإلكتروني</label>
-                        <input type="email" id="registerEmail" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword" data-i18n="password">كلمة المرور</label>
-                        <input type="password" id="registerPassword" class="form-control" placeholder="أنشئ كلمة مرور قوية" required>
-                        <button type="button" class="password-toggle" id="registerPasswordToggle">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerConfirmPassword" data-i18n="confirmPassword">تأكيد كلمة المرور</label>
-                        <input type="password" id="registerConfirmPassword" class="form-control" placeholder="أعد إدخال كلمة المرور" required>
-                        <button type="button" class="password-toggle" id="registerConfirmPasswordToggle">
-                            <i class="far fa-eye"></i>
-                        </button>
-                    </div>
-                   
-                    <button type="submit" class="ios-btn ios-btn-primary auth-submit" data-i18n="createAccount">إنشاء حساب</button>
-                    <div class="auth-footer">
-                        <p data-i18n="termsAgreement">بالنقر على "إنشاء حساب" فأنت توافق على <a href="#" data-i18n="terms">الشروط والأحكام</a> و <a href="#" data-i18n="privacy">سياسة الخصوصية</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="ai-subscription-modal" id="aiSubscriptionModal">
-        <div class="ai-subscription-header">
-            <h2>انتهى رصيدك المجاني</h2>
-            <p>للاستمرار في استخدام GEAR AI، يرجى الاشتراك</p>
-        </div>
-        <div class="ai-subscription-body">
-            <div class="ai-subscription-plans" id="aiSubscriptionPlans">
-                <div class="ai-subscription-plan" data-plan="basic">
-                    <div class="ai-plan-name">الاشتراك الأساسي</div>
-                    <div class="ai-plan-price">100 رسالة إضافية</div>
-                    <div class="ai-plan-features">إرسال 100 رسالة إضافية</div>
-                </div>
-                <div class="ai-subscription-plan" data-plan="premium">
-                    <div class="ai-plan-name">الاشتراك المميز</div>
-                    <div class="ai-plan-price">رسائل غير محدودة</div>
-                    <div class="ai-plan-features">إرسال رسائل غير محدودة لمدة شهر</div>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="subscriptionCode">أو أدخل كود الاشتراك</label>
-                <input type="text" id="subscriptionCode" class="ai-code-input" placeholder="أدخل الكود هنا">
-                <button class="ios-btn ios-btn-primary auth-submit" id="activateSubscription">تفعيل الاشتراك</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="ai-overlay" id="aiOverlay"></div>
-
     <script>
-        // إنشاء خلفية متحركة بديلة للفيديو
-        function createAnimatedBackground() {
-            const videoBg = document.querySelector('.hero-video-bg');
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            videoBg.appendChild(canvas);
-            
-            let particles = [];
-            const particleCount = 50;
-            
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2 + 1;
-                    this.speedX = Math.random() * 0.5 - 0.25;
-                    this.speedY = Math.random() * 0.5 - 0.25;
-                    this.color = `rgba(10, 132, 255, ${Math.random() * 0.3 + 0.1})`;
-                }
-                
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    
-                    if (this.x > canvas.width) this.x = 0;
-                    if (this.x < 0) this.x = canvas.width;
-                    if (this.y > canvas.height) this.y = 0;
-                    if (this.y < 0) this.y = canvas.height;
-                }
-                
-                draw() {
-                    ctx.fillStyle = this.color;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-            
-            function init() {
-                particles = [];
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
-                }
-            }
-            
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                // خلفية متدرجة
-                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradient.addColorStop(0, 'rgba(0, 0, 0, 0.8)');
-                gradient.addColorStop(1, 'rgba(10, 132, 255, 0.2)');
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                particles.forEach(particle => {
-                    particle.update();
-                    particle.draw();
-                });
-                
-                requestAnimationFrame(animate);
-            }
-            
-            init();
-            animate();
-            
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                init();
-            });
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCffrRr-wYBeiAf7GML6Xs3kQg-14mLFhQ",
+        authDomain: "prompat-76c51.firebaseapp.com",
+        projectId: "prompat-76c51",
+        storageBucket: "prompat-76c51.firebasestorage.app",
+        messagingSenderId: "663109200073",
+        appId: "1:663109200073:web:9da9a15649a88028b68518",
+        measurementId: "G-HKL1XTBX6H"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+
+      // DOM Elements
+      const authModal = document.getElementById('authModal');
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const loginBtn = document.getElementById('loginBtn');
+      const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+      const closeModal = document.querySelector('.close-modal');
+      const switchToSignup = document.getElementById('switchToSignup');
+      const switchToLogin = document.getElementById('switchToLogin');
+      const modalTitle = document.getElementById('modalTitle');
+      const userInfo = document.getElementById('userInfo');
+      const userName = document.getElementById('userName');
+      const userAvatar = document.getElementById('userAvatar');
+      const messageCounter = document.getElementById('messageCounter');
+      const mobileUserInfo = document.getElementById('mobileUserInfo');
+      const mobileUserName = document.getElementById('mobileUserName');
+      const mobileUserAvatar = document.getElementById('mobileUserAvatar');
+      const mobileMessageCounter = document.getElementById('mobileMessageCounter');
+      const subscribeButtons = document.querySelectorAll('.subscribe-btn');
+      const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+      const promoCodeForm = document.getElementById('promoCodeForm');
+      const promoCodeInput = document.getElementById('promoCode');
+      const getCodeBtn = document.getElementById('getCodeBtn');
+      const promoCodeAlert = document.getElementById('promoCodeAlert');
+
+      // Special promo codes with their benefits
+      const specialPromoCodes = {
+        "GEAR78STUD": {
+          messages: 500,
+          premium: false,
+          description: "كود الطلاب - 500 رسالة"
+        },
+        "YOUSEFGEAR55": {
+          messages: 5000,
+          premium: true,
+          description: "كود مميز - 5000 رسالة + اشتراك بريميوم"
+        },
+        "IAMPRO8GE": {
+          messages: 8000,
+          premium: true,
+          description: "كود محترف - 8000 رسالة + اشتراك بريميوم"
         }
+      };
 
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCffrRr-wYBeiAf7GML6Xs3kQg-14mLFhQ",
-            authDomain: "prompat-76c51.firebaseapp.com",
-            projectId: "prompat-76c51",
-            storageBucket: "prompat-76c51.firebasestorage.app",
-            messagingSenderId: "663109200073",
-            appId: "1:663109200073:web:9da9a15649a88028b68518"
-        };
+      // Array of random user avatar images
+      const userAvatarImages = [
+        'images/avatars/avatar1.jpg',
+        'images/avatars/avatar2.jpg',
+        'images/avatars/avatar3.jpg',
+        'images/avatars/avatar4.jpg',
+        'images/avatars/avatar5.jpg',
+        'images/avatars/avatar6.jpg'
+      ];
 
-        // Initialize Firebase
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
+      // Function to get a random avatar image
+      function getRandomAvatar() {
+        const randomIndex = Math.floor(Math.random() * userAvatarImages.length);
+        return userAvatarImages[randomIndex];
+      }
+
+      // Show alert message
+      function showAlert(message, type = 'success') {
+        promoCodeAlert.innerHTML = `
+          <div class="alert-${type}" style="background: ${type === 'success' ? 'var(--success-color)' : 'var(--danger-color)'}; color: white; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+            ${message}
+          </div>
+        `;
+        setTimeout(() => {
+          promoCodeAlert.innerHTML = '';
+        }, 5000);
+      }
+
+      // Send email verification
+      function sendEmailVerification() {
+        const user = auth.currentUser;
+        if (user) {
+          user.sendEmailVerification()
+          .then(() => {
+            showAlert('تم إرسال رابط التحقق إلى بريدك الإلكتروني. يرجى التحقق من بريدك.', 'success');
+          })
+          .catch((error) => {
+            console.error('Error sending verification email:', error);
+            showAlert('حدث خطأ في إرسال بريد التحقق', 'error');
+          });
         }
-        const auth = firebase.auth();
+      }
 
-        class GearAIChat {
-            constructor() {
-                this.apiKey = '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';
-                this.apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
-                this.model = 'openrouter/sherlock-dash-alpha';
-                
-                this.currentConversation = null;
-                this.conversations = [];
-                this.isGenerating = false;
-                this.abortController = null;
-                
-                this.dailyLimit = 100;
-                this.totalLimit = 1000;
-                this.userMessages = this.getUserMessages();
-                
-                this.init();
+      // Check email verification status
+      function checkEmailVerification() {
+        const user = auth.currentUser;
+        if (user) {
+          user.reload().then(() => {
+            if (user.emailVerified) {
+              // Update avatar with verified badge
+              userAvatar.classList.add('verified');
+              mobileUserAvatar.classList.add('verified');
+              
+              // Update user data in Firestore
+              db.collection('users').doc(user.uid).update({
+                emailVerified: true,
+                emailVerifiedAt: firebase.firestore.FieldValue.serverTimestamp()
+              });
             }
-            
-            init() {
-                this.loadConversations();
-                this.setupEventListeners();
-                this.updateUI();
-                
-                if (this.currentConversation) {
-                    this.displayConversation(this.currentConversation);
-                } else {
-                    this.showQuickQuestions();
-                }
-            }
-            
-            setupEventListeners() {
-                document.getElementById('aiSendBtn').addEventListener('click', () => {
-                    this.sendMessage();
-                });
-                
-                document.getElementById('aiChatInput').addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        this.sendMessage();
-                    }
-                });
-                
-                document.getElementById('aiNewChat').addEventListener('click', () => {
-                    this.newConversation();
-                });
-                
-                document.getElementById('aiToggleSidebar').addEventListener('click', () => {
-                    this.toggleSidebar();
-                });
-                
-                document.getElementById('aiSidebarClose').addEventListener('click', () => {
-                    this.toggleSidebar();
-                });
-                
-                document.getElementById('aiCloseChat').addEventListener('click', () => {
-                    this.closeChat();
-                });
-                
-                document.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('ai-quick-question')) {
-                        const questionText = e.target.getAttribute('data-question');
-                        document.getElementById('aiChatInput').value = questionText;
-                        this.sendMessage();
-                    }
-                });
-                
-                document.getElementById('activateSubscription').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.activateSubscription();
-                });
-                
-                // Auto-resize textarea
-                document.getElementById('aiChatInput').addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = (this.scrollHeight) + 'px';
-                });
-            }
-            
-            sendMessage() {
-                const input = document.getElementById('aiChatInput');
-                const message = input.value.trim();
-                
-                if (!message) return;
-                
-                if (!this.canSendMessage()) {
-                    this.showSubscriptionModal();
-                    return;
-                }
-                
-                input.value = '';
-                input.style.height = 'auto';
-                
-                if (!this.currentConversation) {
-                    this.newConversation();
-                }
-                
-                this.addMessage('user', message);
-                this.generateAIResponse(message);
-                this.incrementMessageCount();
-            }
-            
-            async generateAIResponse(userMessage) {
-                this.isGenerating = true;
-                this.updateSendButton();
-                this.showLoadingIndicator();
-                
-                this.abortController = new AbortController();
-                
-                try {
-                    const messages = [
-                        {
-                            role: "system",
-                            content: "أنت مساعد ذكي يتحدث العربية بطلاقة. قدم إجابات مفيدة ودقيقة."
-                        },
-                        ...this.currentConversation.messages.map(msg => ({
-                            role: msg.role,
-                            content: msg.content
-                        })),
-                        {
-                            role: "user",
-                            content: userMessage
-                        }
-                    ];
-
-                    const response = await fetch(this.apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${this.apiKey}`,
-                            'HTTP-Referer': window.location.origin,
-                            'X-Title': 'GEAR AI'
-                        },
-                        body: JSON.stringify({
-                            model: this.model,
-                            messages: messages,
-                            max_tokens: 1000,
-                            temperature: 0.7
-                        }),
-                        signal: this.abortController.signal
-                    });
-                    
-                    if (!response.ok) {
-                        throw new Error(`خطأ في الاتصال: ${response.status}`);
-                    }
-                    
-                    const data = await response.json();
-                    
-                    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-                        throw new Error('استجابة غير صالحة من API');
-                    }
-                    
-                    const aiResponse = data.choices[0].message.content;
-                    this.hideLoadingIndicator();
-                    this.addMessage('assistant', aiResponse);
-                    
-                } catch (error) {
-                    if (error.name === 'AbortError') {
-                        console.log('تم إيقاف التوليد بواسطة المستخدم');
-                        this.hideLoadingIndicator();
-                    } else {
-                        console.error('Error generating response:', error);
-                        this.hideLoadingIndicator();
-                        this.addMessage('assistant', `عذراً، حدث خطأ في الاتصال بالذكاء الاصطناعي. يرجى المحاولة مرة أخرى.`);
-                    }
-                } finally {
-                    this.isGenerating = false;
-                    this.updateSendButton();
-                }
-            }
-            
-            stopGeneration() {
-                if (this.abortController) {
-                    this.abortController.abort();
-                    this.isGenerating = false;
-                    this.updateSendButton();
-                    this.hideLoadingIndicator();
-                }
-            }
-            
-            addMessage(role, content) {
-                const message = {
-                    role,
-                    content,
-                    timestamp: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
-                };
-                
-                if (this.currentConversation) {
-                    this.currentConversation.messages.push(message);
-                    this.currentConversation.lastMessage = content.substring(0, 50) + (content.length > 50 ? '...' : '');
-                    this.currentConversation.updatedAt = new Date().toISOString();
-                    
-                    if (this.currentConversation.messages.length === 1 && role === 'user') {
-                        this.currentConversation.title = content.substring(0, 30) + (content.length > 30 ? '...' : '');
-                    }
-                }
-                
-                this.displayMessage(message);
-                this.saveConversations();
-                this.updateConversationsList();
-            }
-            
-            displayMessage(message) {
-                const messagesContainer = document.getElementById('aiChatMessages');
-                
-                const quickQuestions = document.getElementById('aiQuickQuestions');
-                if (quickQuestions) {
-                    quickQuestions.style.display = 'none';
-                }
-                
-                const messageElement = document.createElement('div');
-                messageElement.className = `message ${message.role === 'user' ? 'user-message' : 'ai-message'}`;
-                
-                messageElement.innerHTML = `
-                    <div>${message.content}</div>
-                    <div class="message-time">${message.timestamp}</div>
-                `;
-                
-                messagesContainer.appendChild(messageElement);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }
-            
-            showLoadingIndicator() {
-                const messagesContainer = document.getElementById('aiChatMessages');
-                
-                const loadingElement = document.createElement('div');
-                loadingElement.className = 'ai-loading';
-                loadingElement.id = 'aiLoading';
-                
-                loadingElement.innerHTML = `
-                    <div class="loading-dots">
-                        <div class="loading-dot"></div>
-                        <div class="loading-dot"></div>
-                        <div class="loading-dot"></div>
-                    </div>
-                    <span>GEAR AI يكتب...</span>
-                `;
-                
-                messagesContainer.appendChild(loadingElement);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }
-            
-            hideLoadingIndicator() {
-                const loadingElement = document.getElementById('aiLoading');
-                if (loadingElement) {
-                    loadingElement.remove();
-                }
-            }
-            
-            updateSendButton() {
-                const sendBtn = document.getElementById('aiSendBtn');
-                
-                if (this.isGenerating) {
-                    sendBtn.innerHTML = '<i class="fas fa-stop"></i>';
-                    sendBtn.title = 'إيقاف التوليد';
-                    sendBtn.style.background = 'var(--accent-red)';
-                    sendBtn.onclick = () => this.stopGeneration();
-                } else {
-                    sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
-                    sendBtn.title = 'إرسال';
-                    sendBtn.style.background = 'var(--accent-blue)';
-                    sendBtn.onclick = () => this.sendMessage();
-                }
-            }
-            
-            newConversation() {
-                this.currentConversation = {
-                    id: Date.now().toString(),
-                    title: 'محادثة جديدة',
-                    messages: [],
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    lastMessage: ''
-                };
-                
-                this.conversations.unshift(this.currentConversation);
-                this.clearChatMessages();
-                this.showQuickQuestions();
-                this.saveConversations();
-                this.updateConversationsList();
-            }
-            
-            clearChatMessages() {
-                const messagesContainer = document.getElementById('aiChatMessages');
-                messagesContainer.innerHTML = '';
-            }
-            
-            showQuickQuestions() {
-                const messagesContainer = document.getElementById('aiChatMessages');
-                const quickQuestions = document.getElementById('aiQuickQuestions');
-                
-                if (quickQuestions) {
-                    quickQuestions.style.display = 'grid';
-                    messagesContainer.appendChild(quickQuestions);
-                }
-            }
-            
-            displayConversation(conversation) {
-                this.currentConversation = conversation;
-                this.clearChatMessages();
-                
-                conversation.messages.forEach(message => {
-                    this.displayMessage(message);
-                });
-                
-                this.hideQuickQuestions();
-            }
-            
-            hideQuickQuestions() {
-                const quickQuestions = document.getElementById('aiQuickQuestions');
-                if (quickQuestions) {
-                    quickQuestions.style.display = 'none';
-                }
-            }
-            
-            toggleSidebar() {
-                const sidebar = document.getElementById('aiSidebar');
-                sidebar.classList.toggle('hidden');
-            }
-            
-            closeChat() {
-                const aiSection = document.getElementById('aiSection');
-                aiSection.classList.remove('active');
-            }
-            
-            updateConversationsList() {
-                const conversationsContainer = document.getElementById('aiConversations');
-                conversationsContainer.innerHTML = '';
-                
-                this.conversations.forEach(conversation => {
-                    const conversationElement = document.createElement('div');
-                    conversationElement.className = `ai-conversation-item ${conversation.id === this.currentConversation?.id ? 'active' : ''}`;
-                    conversationElement.innerHTML = `
-                        <div class="ai-conversation-title">${conversation.title}</div>
-                        <div class="ai-conversation-preview">${conversation.lastMessage || 'لا توجد رسائل'}</div>
-                    `;
-                    
-                    conversationElement.addEventListener('click', () => {
-                        this.displayConversation(conversation);
-                        if (window.innerWidth <= 992) {
-                            this.toggleSidebar();
-                        }
-                    });
-                    
-                    conversationsContainer.appendChild(conversationElement);
-                });
-            }
-            
-            saveConversations() {
-                localStorage.setItem('gearai_conversations', JSON.stringify(this.conversations));
-            }
-            
-            loadConversations() {
-                const savedConversations = localStorage.getItem('gearai_conversations');
-                
-                if (savedConversations) {
-                    this.conversations = JSON.parse(savedConversations);
-                    if (this.conversations.length > 0) {
-                        this.currentConversation = this.conversations[0];
-                    }
-                }
-            }
-            
-            canSendMessage() {
-                return this.userMessages.today < this.dailyLimit && this.userMessages.total < this.totalLimit;
-            }
-            
-            incrementMessageCount() {
-                const today = new Date().toDateString();
-                
-                if (this.userMessages.lastDate !== today) {
-                    this.userMessages.today = 0;
-                    this.userMessages.lastDate = today;
-                }
-                
-                this.userMessages.today++;
-                this.userMessages.total++;
-                this.saveUserMessages();
-                this.updateMessageCount();
-            }
-            
-            updateMessageCount() {
-                const remainingElement = document.getElementById('remainingMessages');
-                if (remainingElement) {
-                    const remaining = Math.max(0, this.dailyLimit - this.userMessages.today);
-                    remainingElement.textContent = `${remaining}/${this.dailyLimit}`;
-                }
-            }
-            
-            getUserMessages() {
-                const saved = localStorage.getItem('gearai_user_messages');
-                const today = new Date().toDateString();
-                
-                if (saved) {
-                    const messages = JSON.parse(saved);
-                    if (messages.lastDate !== today) {
-                        messages.today = 0;
-                        messages.lastDate = today;
-                    }
-                    return messages;
-                }
-                
-                return {
-                    today: 0,
-                    total: 0,
-                    lastDate: today
-                };
-            }
-            
-            saveUserMessages() {
-                localStorage.setItem('gearai_user_messages', JSON.stringify(this.userMessages));
-            }
-            
-            showSubscriptionModal() {
-                const modal = document.getElementById('aiSubscriptionModal');
-                const overlay = document.getElementById('aiOverlay');
-                
-                modal.classList.add('active');
-                overlay.classList.add('active');
-                
-                document.querySelectorAll('.ai-subscription-plan').forEach(plan => {
-                    plan.addEventListener('click', () => {
-                        document.querySelectorAll('.ai-subscription-plan').forEach(p => {
-                            p.classList.remove('selected');
-                        });
-                        plan.classList.add('selected');
-                    });
-                });
-            }
-            
-            activateSubscription() {
-                const codeInput = document.getElementById('subscriptionCode');
-                const code = codeInput.value.trim();
-                const selectedPlan = document.querySelector('.ai-subscription-plan.selected');
-                
-                if (selectedPlan) {
-                    const planType = selectedPlan.getAttribute('data-plan');
-                    
-                    if (planType === 'premium') {
-                        this.dailyLimit = 1000;
-                        this.totalLimit = 100000;
-                    } else if (planType === 'basic') {
-                        this.dailyLimit += 100;
-                        this.totalLimit += 100;
-                    }
-                    
-                    this.hideSubscriptionModal();
-                    this.updateMessageCount();
-                    
-                    this.showAuthMessage('تم تفعيل الاشتراك بنجاح!', 'success');
-                } else if (code) {
-                    if (this.validateSubscriptionCode(code)) {
-                        this.dailyLimit = 1000;
-                        this.totalLimit = 100000;
-                        this.hideSubscriptionModal();
-                        this.updateMessageCount();
-                        this.showAuthMessage('تم تفعيل الاشتراك بنجاح!', 'success');
-                    } else {
-                        this.showAuthMessage('كود الاشتراك غير صالح', 'error');
-                    }
-                } else {
-                    this.showAuthMessage('يرجى اختيار خطة أو إدخال كود اشتراك', 'error');
-                }
-            }
-            
-            validateSubscriptionCode(code) {
-                const validCodes = ['GEARAI2024', 'PREMIUM123', 'FREEMIUM'];
-                return validCodes.includes(code.toUpperCase());
-            }
-            
-            hideSubscriptionModal() {
-                const modal = document.getElementById('aiSubscriptionModal');
-                const overlay = document.getElementById('aiOverlay');
-                
-                modal.classList.remove('active');
-                overlay.classList.remove('active');
-            }
-            
-            showAuthMessage(message, type) {
-                const authMessage = document.getElementById('authMessage');
-                authMessage.textContent = message;
-                authMessage.className = `auth-message ${type}`;
-                
-                setTimeout(() => {
-                    authMessage.className = 'auth-message';
-                }, 5000);
-            }
-            
-            setCurrentUser(user) {
-                this.currentUser = user;
-                this.updateUserInfo();
-            }
-            
-            updateUserInfo() {
-                if (this.currentUser) {
-                    const userName = this.currentUser.displayName || 'مستخدم';
-                    const userEmail = this.currentUser.email;
-                    const userInitial = userName.charAt(0);
-                    
-                    document.getElementById('aiUserName').textContent = userName;
-                    document.getElementById('aiUserEmail').textContent = userEmail;
-                    document.getElementById('aiUserAvatar').innerHTML = userInitial;
-                }
-            }
-
-            updateUI() {
-                this.updateMessageCount();
-                this.updateConversationsList();
-            }
-            
-            openChat() {
-                const aiSection = document.getElementById('aiSection');
-                aiSection.classList.add('active');
-                
-                // إذا لم يكن هناك محادثة حالية، أنشئ واحدة جديدة
-                if (!this.currentConversation) {
-                    this.newConversation();
-                }
-            }
+          });
         }
+      }
 
-        class AuthSystem {
-            constructor() {
-                this.currentUser = null;
-                this.gearAI = null;
-                this.init();
-            }
-            
-            init() {
-                this.setupEventListeners();
-                this.checkAuthState();
-                this.gearAI = new GearAIChat();
-            }
-            
-            setupEventListeners() {
-                // إصلاح فتح قسم الشات
-                document.querySelectorAll('.start-chat-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.gearAI.openChat();
-                    });
-                });
-
-                document.querySelectorAll('.login-btn, .register-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.openAuthModal();
-                    });
-                });
-                
-                document.querySelector('.close-auth').addEventListener('click', () => {
-                    this.closeAuthModal();
-                });
-                
-                document.getElementById('authModal').addEventListener('click', (e) => {
-                    if (e.target.id === 'authModal') {
-                        this.closeAuthModal();
-                    }
-                });
-                
-                document.querySelectorAll('.auth-tab').forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        const tabName = tab.getAttribute('data-tab');
-                        this.switchAuthTab(tabName);
-                    });
-                });
-                
-                document.getElementById('loginPasswordToggle').addEventListener('click', () => {
-                    this.togglePasswordVisibility('loginPassword');
-                });
-                
-                document.getElementById('registerPasswordToggle').addEventListener('click', () => {
-                    this.togglePasswordVisibility('registerPassword');
-                });
-                
-                document.getElementById('registerConfirmPasswordToggle').addEventListener('click', () => {
-                    this.togglePasswordVisibility('registerConfirmPassword');
-                });
-                
-                document.getElementById('loginForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.login();
-                });
-                
-                document.getElementById('registerForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.register();
-                });
-                
-                document.querySelector('.user-profile').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.toggleUserDropdown();
-                });
-                
-                document.querySelector('.logout-link').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.logout();
-                });
-                
-                document.addEventListener('click', () => {
-                    this.hideUserDropdown();
-                });
-                
-                document.querySelector('.menu-toggle').addEventListener('click', () => {
-                    this.toggleMobileMenu();
-                });
-                
-                document.getElementById('aiOverlay').addEventListener('click', () => {
-                    this.gearAI.hideSubscriptionModal();
-                });
-            }
-            
-            openAuthModal() {
-                document.getElementById('authModal').style.display = 'flex';
-            }
-            
-            closeAuthModal() {
-                document.getElementById('authModal').style.display = 'none';
-                this.clearAuthForms();
-            }
-            
-            switchAuthTab(tabName) {
-                document.querySelectorAll('.auth-tab').forEach(tab => {
-                    tab.classList.toggle('active', tab.getAttribute('data-tab') === tabName);
-                });
-                
-                document.querySelectorAll('.auth-form').forEach(form => {
-                    form.classList.toggle('active', form.id === `${tabName}Form`);
-                });
-            }
-            
-            togglePasswordVisibility(inputId) {
-                const input = document.getElementById(inputId);
-                const toggle = document.getElementById(`${inputId}Toggle`);
-                const icon = toggle.querySelector('i');
-                
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.className = 'far fa-eye-slash';
-                } else {
-                    input.type = 'password';
-                    icon.className = 'far fa-eye';
-                }
-            }
-            
-            async login() {
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-                
-                try {
-                    const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                    this.currentUser = userCredential.user;
-                    this.onAuthSuccess();
-                } catch (error) {
-                    this.showAuthMessage(this.getAuthErrorMessage(error), 'error');
-                }
-            }
-            
-            async register() {
-                const name = document.getElementById('registerName').value;
-                const email = document.getElementById('registerEmail').value;
-                const password = document.getElementById('registerPassword').value;
-                const confirmPassword = document.getElementById('registerConfirmPassword').value;
-                
-                if (password !== confirmPassword) {
-                    this.showAuthMessage('كلمات المرور غير متطابقة', 'error');
-                    return;
-                }
-                
-                if (password.length < 6) {
-                    this.showAuthMessage('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
-                    return;
-                }
-                
-                try {
-                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                    this.currentUser = userCredential.user;
-                    
-                    await this.currentUser.updateProfile({
-                        displayName: name
-                    });
-                    
-                    this.onAuthSuccess();
-                } catch (error) {
-                    this.showAuthMessage(this.getAuthErrorMessage(error), 'error');
-                }
-            }
-            
-            async logout() {
-                try {
-                    await auth.signOut();
-                    this.currentUser = null;
-                    this.updateUI();
-                    this.hideUserDropdown();
-                } catch (error) {
-                    console.error('Error logging out:', error);
-                }
-            }
-            
-            onAuthSuccess() {
-                this.closeAuthModal();
-                this.updateUI();
-                this.gearAI.setCurrentUser(this.currentUser);
-                this.showAuthMessage('تم تسجيل الدخول بنجاح!', 'success');
-            }
-            
-            checkAuthState() {
-                auth.onAuthStateChanged((user) => {
-                    this.currentUser = user;
-                    this.updateUI();
-                    
-                    if (user) {
-                        this.gearAI.setCurrentUser(user);
-                    }
-                });
-            }
-            
-            updateUI() {
-                const authButtons = document.querySelector('.auth-buttons');
-                const userProfile = document.querySelector('.user-profile');
-                
-                if (this.currentUser) {
-                    authButtons.style.display = 'none';
-                    userProfile.style.display = 'flex';
-                    
-                    const userName = this.currentUser.displayName || 'مستخدم';
-                    const userInitial = userName.charAt(0);
-                    
-                    userProfile.querySelector('.user-name').textContent = userName;
-                    userProfile.querySelector('.user-avatar').innerHTML = userInitial;
-                    
-                } else {
-                    authButtons.style.display = 'flex';
-                    userProfile.style.display = 'none';
-                }
-            }
-            
-            toggleUserDropdown() {
-                const dropdown = document.querySelector('.user-dropdown');
-                dropdown.classList.toggle('show');
-            }
-            
-            hideUserDropdown() {
-                const dropdown = document.querySelector('.user-dropdown');
-                dropdown.classList.remove('show');
-            }
-            
-            toggleMobileMenu() {
-                const navLinks = document.querySelector('.nav-links');
-                navLinks.classList.toggle('mobile-open');
-            }
-            
-            showAuthMessage(message, type) {
-                const authMessage = document.getElementById('authMessage');
-                authMessage.textContent = message;
-                authMessage.className = `auth-message ${type}`;
-                
-                setTimeout(() => {
-                    authMessage.className = 'auth-message';
-                }, 5000);
-            }
-            
-            clearAuthForms() {
-                document.getElementById('loginForm').reset();
-                document.getElementById('registerForm').reset();
-                document.getElementById('authMessage').className = 'auth-message';
-            }
-            
-            getAuthErrorMessage(error) {
-                switch (error.code) {
-                    case 'auth/invalid-email':
-                        return 'البريد الإلكتروني غير صالح';
-                    case 'auth/user-disabled':
-                        return 'هذا الحساب معطل';
-                    case 'auth/user-not-found':
-                        return 'لا يوجد حساب بهذا البريد الإلكتروني';
-                    case 'auth/wrong-password':
-                        return 'كلمة المرور غير صحيحة';
-                    case 'auth/email-already-in-use':
-                        return 'هذا البريد الإلكتروني مستخدم بالفعل';
-                    case 'auth/weak-password':
-                        return 'كلمة المرور ضعيفة جداً';
-                    case 'auth/network-request-failed':
-                        return 'خطأ في الاتصال بالشبكة';
-                    default:
-                        return 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى';
-                }
-            }
+      // Update message counter display
+      function updateMessageCounter(usedMessages = 0, availableMessages = 50) {
+        const remaining = availableMessages - usedMessages;
+        const counterElement = messageCounter;
+        const mobileCounterElement = mobileMessageCounter;
+        
+        // Update counter text
+        counterElement.textContent = `${remaining} رسالة متبقية`;
+        mobileCounterElement.textContent = `${remaining} رسالة متبقية`;
+        
+        // Update counter color based on remaining messages
+        counterElement.className = 'message-counter';
+        mobileCounterElement.className = 'message-counter';
+        
+        if (remaining <= 10) {
+          counterElement.classList.add('critical');
+          mobileCounterElement.classList.add('critical');
+        } else if (remaining <= 25) {
+          counterElement.classList.add('low');
+          mobileCounterElement.classList.add('low');
         }
+      }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            createAnimatedBackground();
-            new AuthSystem();
-            
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            
-            document.querySelectorAll('.feature-card, .stat').forEach(el => {
-                observer.observe(el);
-            });
+      // Toggle password visibility
+      togglePasswordButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const input = this.parentElement.querySelector('input');
+          const icon = this.querySelector('i');
+          
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+          } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+          }
         });
+      });
 
-        const translations = {
-            home: 'الرئيسية',
-            features: 'الميزات',
-            apps: 'التطبيقات',
-            login: 'تسجيل الدخول',
-            getStarted: 'ابدأ الآن',
-            language: 'العربية',
-            user: 'مستخدم',
-            profile: 'الملف الشخصي',
-            logout: 'تسجيل الخروج',
-            heroTitle: 'تجربة محادثة ذكية مع GEAR AI',
-            heroSubtitle: 'ذكاء اصطناعي بنموذج عالي يساعد في المهام اليومية وإنشاء الأكواد البرمجية GEAR AI V1',
-            getStartedFree: 'ابدأ مجاناً',
-            learnMore: 'تعرف أكثر',
-            featuresTitle: 'ميزات GEAR AI',
-            featuresSubtitle: 'اكتشف مجموعة الميزات المتقدمة التي تجعل GEAR AI الأفضل في فئته',
-            feature1Title: 'محادثات طبيعية',
-            feature1Desc: 'تجربة محادثة طبيعية وسلسة تشبه التحدث مع إنسان حقيقي',
-            feature2Title: 'ذكاء متقدم',
-            feature2Desc: 'تقنية ذكاء اصطناعي متطورة لفهم أعمق للسياق والنوايا',
-            feature3Title: 'دعم متعدد اللغات',
-            feature3Desc: 'دعم للعديد من اللغات بما فيها العربية بطلاقة تامة',
-            feature4Title: 'آمن وخاص',
-            feature4Desc: 'حماية كاملة لبياناتك وخصوصية محادثاتك',
-            feature5Title: 'استجابة سريعة',
-            feature5Desc: 'استجابة فورية دون تأخير يذكر في جميع المحادثات',
-            feature6Title: 'تحديثات مستمرة',
-            feature6Desc: 'تحسينات وتحديثات مستمرة لتحسين تجربة المستخدم',
-            appsTitle: 'حمّل تطبيق GEAR AI',
-            appsSubtitle: 'احمل التطبيق على هاتفك واستمتع بتجربة GEAR AI أينما كنت',
-            downloadFrom: 'حمّل من',
-            communityTitle: 'انضم إلى مجتمعنا النشط',
-            communitySubtitle: 'ملايين المستخدمين حول العالم يثقون في GEAR AI لمحادثاتهم اليومية',
-            activeUsers: 'مستخدم نشط',
-            supportedLanguages: 'لغة مدعومة',
-            satisfactionRate: 'معدل الرضا',
-            joinCommunity: 'انضم إلى المجتمع',
-            footerDesc: 'منصة محادثة ذكية تستخدم أحدث تقنيات الذكاء الاصطناعي لتقديم تجربة محادثة طبيعية ومفيدة.',
-            quickLinks: 'الروابط السريعة',
-            support: 'الدعم',
-            contactUs: 'اتصل بنا',
-            faq: 'الأسئلة الشائعة',
-            contact: 'اتصل بنا',
-            terms: 'الشروط والأحكام',
-            privacy: 'سياسة الخصوصية',
-            location: 'المنيا مصر',
-            copyright: 'جميع الحقوق محفوظة &copy; 2025 M0S7A5E-GEAR AI',
-            welcomeBack: 'مرحباً بعودتك',
-            loginToAccess: 'سجل الدخول للوصول إلى حسابك',
-            createAccount: 'إنشاء حساب جديد',
-            email: 'البريد الإلكتروني',
-            password: 'كلمة المرور',
-            fullName: 'الاسم الكامل',
-            confirmPassword: 'تأكيد كلمة المرور',
-            forgotPassword: 'نسيت كلمة المرور؟',
-            termsAgreement: 'بالنقر على "إنشاء حساب" فأنت توافق على'
-        };
+      // Switch between login and signup forms
+      switchToSignup.addEventListener('click', function() {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        modalTitle.textContent = 'إنشاء حساب';
+      });
 
-        document.querySelectorAll('[data-i18n]').forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            if (translations[key]) {
-                element.textContent = translations[key];
-            }
+      switchToLogin.addEventListener('click', function() {
+        signupForm.style.display = 'none';
+        loginForm.style.display = 'block';
+        modalTitle.textContent = 'تسجيل الدخول';
+      });
+
+      // Open modal
+      function openAuthModal() {
+        authModal.classList.add('active');
+      }
+
+      // Close modal
+      function closeAuthModal() {
+        authModal.classList.remove('active');
+        // Reset forms
+        loginForm.reset();
+        signupForm.reset();
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        modalTitle.textContent = 'تسجيل الدخول';
+      }
+
+      // Event listeners for modal
+      loginBtn.addEventListener('click', openAuthModal);
+      mobileLoginBtn.addEventListener('click', openAuthModal);
+      closeModal.addEventListener('click', closeAuthModal);
+
+      // Close modal when clicking outside
+      window.addEventListener('click', function(event) {
+        if (event.target === authModal) {
+          closeAuthModal();
+        }
+      });
+
+      // Sign up function
+      signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('signupUsername').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        if (password !== confirmPassword) {
+          alert('كلمات المرور غير متطابقة');
+          return;
+        }
+        
+        if (password.length < 6) {
+          alert('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+          return;
+        }
+        
+        auth.createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Signed up successfully
+            const user = userCredential.user;
+            
+            // Update user profile with username
+            return user.updateProfile({
+              displayName: username
+            });
+          })
+          .then(() => {
+            // Create user document in Firestore
+            const user = auth.currentUser;
+            const randomAvatar = getRandomAvatar();
+            
+            return db.collection('users').doc(user.uid).set({
+              username: username,
+              email: email,
+              emailVerified: false,
+              premium: false,
+              messages: 0,
+              availableMessages: 50,
+              avatar: randomAvatar,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          })
+          .then(() => {
+            // Send verification email
+            sendEmailVerification();
+            // Close modal and update UI
+            closeAuthModal();
+            updateUserUI();
+            showAlert('تم إنشاء الحساب بنجاح! تم إرسال رابط التحقق إلى بريدك الإلكتروني.');
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(`خطأ في إنشاء الحساب: ${errorMessage}`);
+          });
+      });
+
+      // Login function
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        auth.signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Signed in successfully
+            closeAuthModal();
+            updateUserUI();
+            // Check email verification status
+            checkEmailVerification();
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(`خطأ في تسجيل الدخول: ${errorMessage}`);
+          });
+      });
+
+      // Logout function
+      logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+          auth.signOut().then(() => {
+            updateUserUI();
+          });
+        }
+      });
+
+      mobileLogoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+          auth.signOut().then(() => {
+            updateUserUI();
+          });
+        }
+      });
+
+      // Update UI based on authentication state
+      function updateUserUI() {
+        const user = auth.currentUser;
+        
+        if (user) {
+          // User is signed in
+          const displayName = user.displayName || user.email.split('@')[0];
+          
+          // Get user data from Firestore
+          db.collection('users').doc(user.uid).get()
+            .then((doc) => {
+              if (doc.exists) {
+                const userData = doc.data();
+                
+                // Update desktop UI
+                userName.textContent = displayName;
+                mobileUserName.textContent = displayName;
+                
+                // Set user avatar (use stored avatar or get a random one)
+                if (userData.avatar) {
+                  userAvatar.style.backgroundImage = `url(${userData.avatar})`;
+                  userAvatar.textContent = '';
+                  mobileUserAvatar.style.backgroundImage = `url(${userData.avatar})`;
+                  mobileUserAvatar.textContent = '';
+                } else {
+                  const randomAvatar = getRandomAvatar();
+                  userAvatar.style.backgroundImage = `url(${randomAvatar})`;
+                  userAvatar.textContent = '';
+                  mobileUserAvatar.style.backgroundImage = `url(${randomAvatar})`;
+                  mobileUserAvatar.textContent = '';
+                  
+                  // Update user document with the random avatar
+                  db.collection('users').doc(user.uid).update({
+                    avatar: randomAvatar
+                  });
+                }
+                
+                // Check if user has premium status
+                if (userData.premium) {
+                  userAvatar.classList.add('premium', 'gold-glow');
+                  mobileUserAvatar.classList.add('premium', 'gold-glow');
+                } else {
+                  userAvatar.classList.remove('premium', 'gold-glow');
+                  mobileUserAvatar.classList.remove('premium', 'gold-glow');
+                }
+                
+                // Check email verification
+                if (userData.emailVerified || user.emailVerified) {
+                  userAvatar.classList.add('verified');
+                  mobileUserAvatar.classList.add('verified');
+                }
+                
+                // Update messages count
+                const usedMessages = userData.messages || 0;
+                const availableMessages = userData.availableMessages || 50;
+                updateMessageCounter(usedMessages, availableMessages);
+                
+                userInfo.classList.add('active');
+                loginBtn.style.display = 'none';
+                
+                // Update mobile UI
+                mobileUserInfo.style.display = 'block';
+                mobileLoginBtn.style.display = 'none';
+              }
+            })
+            .catch((error) => {
+              console.error("Error getting user document:", error);
+            });
+        } else {
+          // User is signed out
+          userInfo.classList.remove('active');
+          loginBtn.style.display = 'block';
+          
+          mobileUserInfo.style.display = 'none';
+          mobileLoginBtn.style.display = 'block';
+        }
+      }
+
+      // Subscribe button functionality
+      subscribeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const user = auth.currentUser;
+          if (!user) {
+            // User not logged in, open auth modal
+            openAuthModal();
+            return;
+          }
+          
+          // User is logged in, proceed with subscription
+          const plan = this.getAttribute('data-plan');
+          const price = this.getAttribute('data-price');
+          const username = user.displayName || user.email.split('@')[0];
+          
+          // Create WhatsApp message
+          const message = `مرحباً، أريد الاشتراك في باقة ${plan} من GEAR AI بسعر ${price} جنيه.\nاسم المستخدم: ${username}`;
+          const encodedMessage = encodeURIComponent(message);
+          const whatsappURL = `https://wa.me/201148179176?text=${encodedMessage}`;
+          
+          // Redirect to WhatsApp
+          window.open(whatsappURL, '_blank');
         });
+      });
+
+      // Promo code functionality - الإصلاح النهائي
+      promoCodeForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const user = auth.currentUser;
+        if (!user) {
+          showAlert('يجب تسجيل الدخول أولاً لتفعيل كود الاشتراك', 'error');
+          openAuthModal();
+          return;
+        }
+        
+        const promoCode = promoCodeInput.value.trim().toUpperCase();
+        
+        if (!promoCode) {
+          showAlert('يرجى إدخال كود الاشتراك', 'error');
+          return;
+        }
+        
+        // Check if the promo code exists in our special codes
+        if (specialPromoCodes[promoCode]) {
+          const promoDetails = specialPromoCodes[promoCode];
+          
+          // Check if this code has already been used by this user
+          db.collection('usedPromoCodes').doc(`${user.uid}_${promoCode}`).get()
+            .then((doc) => {
+              if (doc.exists) {
+                showAlert('لقد استخدمت هذا الكود من قبل. كل كود يمكن استخدامه مرة واحدة فقط.', 'error');
+                return;
+              }
+              
+              // Code hasn't been used by this user, proceed with activation
+              const userRef = db.collection('users').doc(user.uid);
+              
+              // Get current user data
+              userRef.get().then((doc) => {
+                if (doc.exists) {
+                  const userData = doc.data();
+                  
+                  // الإصلاح النهائي: إضافة الرسائل الجديدة إلى الرسائل المتاحة
+                  const currentAvailableMessages = userData.availableMessages || 50;
+                  const newAvailableMessages = currentAvailableMessages + promoDetails.messages;
+                  
+                  // Update user data with new available messages and premium status if applicable
+                  const updateData = {
+                    availableMessages: newAvailableMessages,
+                    promoCodeUsed: promoCode,
+                    promoCodeUsedAt: firebase.firestore.FieldValue.serverTimestamp()
+                  };
+                  
+                  // If the promo code grants premium status, update that too
+                  if (promoDetails.premium) {
+                    updateData.premium = true;
+                    updateData.premiumSince = firebase.firestore.FieldValue.serverTimestamp();
+                  }
+                  
+                  // Update user document
+                  userRef.update(updateData)
+                    .then(() => {
+                      // Mark this code as used by this user
+                      return db.collection('usedPromoCodes').doc(`${user.uid}_${promoCode}`).set({
+                        userId: user.uid,
+                        promoCode: promoCode,
+                        usedAt: firebase.firestore.FieldValue.serverTimestamp()
+                      });
+                    })
+                    .then(() => {
+                      showAlert(`🎉 تم تفعيل كود الاشتراك بنجاح! ${promoDetails.description} - لديك الآن ${newAvailableMessages} رسالة متاحة`, 'success');
+                      promoCodeInput.value = '';
+                      updateUserUI();
+                    })
+                    .catch((error) => {
+                      console.error("Error updating user document:", error);
+                      showAlert('حدث خطأ أثناء تفعيل الكود. يرجى المحاولة مرة أخرى.', 'error');
+                    });
+                }
+              });
+            })
+            .catch((error) => {
+              console.error("Error checking used promo codes:", error);
+              showAlert('حدث خطأ أثناء التحقق من الكود. يرجى المحاولة مرة أخرى.', 'error');
+            });
+        } else {
+          showAlert('كود الاشتراك غير صحيح. يرجى التحقق والمحاولة مرة أخرى.', 'error');
+        }
+      });
+
+      // Get code button - redirect to pricing section
+      getCodeBtn.addEventListener('click', function() {
+        document.getElementById('pricing').scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+
+      // Initialize special promo codes in database (run once)
+      function initializePromoCodes() {
+        const promoCodeRef = db.collection('promoCodes');
+        
+        Object.keys(specialPromoCodes).forEach(code => {
+          promoCodeRef.doc(code).get().then((doc) => {
+            if (!doc.exists) {
+              // Code doesn't exist in database, add it
+              promoCodeRef.doc(code).set({
+                code: code,
+                messages: specialPromoCodes[code].messages,
+                premium: specialPromoCodes[code].premium,
+                description: specialPromoCodes[code].description,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+              });
+            }
+          });
+        });
+      }
+
+      // Check auth state on page load
+      auth.onAuthStateChanged((user) => {
+        updateUserUI();
+        if (user) {
+          checkEmailVerification();
+        }
+        // Initialize promo codes in database
+        initializePromoCodes();
+      });
+
+      // FAQ Accordion
+      document.addEventListener('DOMContentLoaded', () => {
+        const faqContainer = document.querySelector('.faq-content');
+
+        if (faqContainer) {
+          faqContainer.addEventListener('click', (e) => {
+            const groupHeader = e.target.closest('.faq-group-header');
+
+            if (!groupHeader) return;
+
+            const group = groupHeader.parentElement;
+            const groupBody = group.querySelector('.faq-group-body');
+            const icon = groupHeader.querySelector('i');
+
+            // Toggle icon
+            icon.classList.toggle('fa-plus');
+            icon.classList.toggle('fa-minus');
+
+            // Toggle visibility of body
+            groupBody.classList.toggle('open');
+
+            // Close other open FAQ bodies
+            const otherGroups = faqContainer.querySelectorAll('.faq-group');
+
+            otherGroups.forEach((otherGroup) => {
+              if (otherGroup !== group) {
+                const otherGroupBody = otherGroup.querySelector('.faq-group-body');
+                const otherIcon = otherGroup.querySelector('.faq-group-header i');
+
+                otherGroupBody.classList.remove('open');
+                otherIcon.classList.remove('fa-minus');
+                otherIcon.classList.add('fa-plus');
+              }
+            });
+          });
+        }
+      });
+
+      // Mobile Menu
+      document.addEventListener('DOMContentLoaded', () => {
+        const hamburgerButton = document.querySelector('.hamburger-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        hamburgerButton.addEventListener('click', () =>
+          mobileMenu.classList.toggle('active')
+        );
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+            
+            // Close mobile menu if open
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu.classList.contains('active')) {
+              mobileMenu.classList.remove('active');
+            }
+          }
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
