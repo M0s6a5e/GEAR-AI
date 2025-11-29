@@ -145,6 +145,49 @@
             }
         }
 
+        /* Floating Notification */
+        .floating-notification {
+            position: fixed;
+            top: 100px;
+            right: 50%;
+            transform: translateX(50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 16px 24px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideDown 0.3s ease-out;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .floating-notification.success {
+            background: var(--accent-color);
+        }
+
+        .floating-notification.error {
+            background: #ef4444;
+        }
+
+        .floating-notification.warning {
+            background: var(--warning-color);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(50%) translateY(0);
+            }
+        }
+
         /* Main Layout */
         .app-container {
             display: flex;
@@ -285,18 +328,26 @@
             margin-bottom: 4px;
         }
 
-        .message-count {
+        .subscription-status {
             font-size: 14px;
             color: var(--text-secondary);
         }
 
-        .message-counter {
+        .subscription-badge {
             background: var(--primary-color);
             color: white;
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+        }
+
+        .subscription-badge.expired {
+            background: #ef4444;
+        }
+
+        .subscription-badge.warning {
+            background: #f59e0b;
         }
 
         .logout-btn {
@@ -387,7 +438,7 @@
             gap: 12px;
         }
 
-        .message-counter-header {
+        .subscription-status-header {
             background: var(--light-gray);
             border: 1px solid var(--medium-gray);
             color: var(--text-primary);
@@ -395,6 +446,14 @@
             border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
+            display: none; /* مخفي افتراضياً */
+        }
+
+        .subscription-status-header.expired {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            display: flex;
         }
 
         .subscription-btn {
@@ -415,6 +474,18 @@
             box-shadow: var(--shadow-lg);
         }
 
+        .subscribed-btn {
+            padding: 12px 20px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: default;
+            box-shadow: var(--shadow);
+        }
+
         .promo-code-btn {
             padding: 12px 20px;
             background: var(--light-gray);
@@ -425,6 +496,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: none; /* مخفي افتراضياً */
         }
 
         .promo-code-btn:hover {
@@ -633,11 +705,33 @@
             padding: 8px;
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
+            gap: 8px;
+            align-items: flex-end;
         }
 
         .input-wrapper:focus-within {
             border-color: var(--primary-color);
             box-shadow: 0 0 20px rgba(74, 108, 247, 0.2);
+        }
+
+        .input-wrapper.has-text .mobile-model-btn {
+            opacity: 0;
+            visibility: hidden;
+            width: 0;
+            margin: 0;
+            padding: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper:not(.has-text) .mobile-model-btn {
+            opacity: 1;
+            visibility: visible;
+            width: auto;
+            margin: 0;
+            padding: 10px 14px;
+            transform: scale(1);
+            transition: all 0.3s ease;
         }
 
         /* Model Selector - Improved Design */
@@ -688,16 +782,19 @@
             background: var(--light-gray);
             border: 1px solid var(--medium-gray);
             color: var(--text-primary);
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: var(--border-radius-sm);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-left: 8px;
             white-space: nowrap;
-            min-width: 100px;
+            min-width: 80px;
             position: relative;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .mobile-model-btn:hover {
@@ -708,10 +805,10 @@
         .mobile-model-btn::after {
             content: '';
             display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-right: 8px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8.825L1.175 4 2.238 2.938 6 6.7l3.763-3.762L10.825 4z'/%3E%3C/svg%3E");
+            width: 10px;
+            height: 10px;
+            margin-right: 6px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8.825L1.175 4 2.238 2.938 6 6.7l3.763-3.762L10.825 4z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: center;
             transition: transform 0.3s ease;
@@ -733,6 +830,8 @@
             max-height: 120px;
             line-height: 1.5;
             font-family: var(--font-family);
+            flex: 1;
+            transition: all 0.3s ease;
         }
 
         .input-field::placeholder {
@@ -744,15 +843,14 @@
             color: white;
             border: none;
             border-radius: var(--border-radius-sm);
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
-            margin-right: 8px;
             flex-shrink: 0;
         }
 
@@ -795,9 +893,9 @@
             background: var(--white);
             border: 1px solid var(--medium-gray);
             border-radius: var(--border-radius);
-            padding: 24px;
+            padding: 20px;
             width: 100%;
-            max-width: 400px;
+            max-width: 350px;
             box-shadow: var(--shadow-lg);
             transform: scale(0.9) translateY(20px);
             transition: all 0.3s ease;
@@ -813,14 +911,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             padding-bottom: 16px;
             border-bottom: 1px solid var(--light-gray);
         }
 
         .mobile-model-header h3 {
             color: var(--primary-color);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
         }
 
@@ -828,11 +926,11 @@
             background: none;
             border: none;
             color: var(--text-secondary);
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             transition: color 0.3s ease;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -847,18 +945,18 @@
         .mobile-model-options {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .mobile-model-option {
-            padding: 20px 16px;
+            padding: 16px 14px;
             background: var(--light-gray);
             border: 2px solid var(--medium-gray);
             border-radius: var(--border-radius-sm);
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: right;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -887,8 +985,8 @@
             left: 12px;
             top: 50%;
             transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: var(--primary-color);
             border-radius: 50%;
         }
@@ -897,8 +995,8 @@
             background: var(--primary-color);
             color: white;
             padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
+            border-radius: 10px;
+            font-size: 11px;
             font-weight: 600;
         }
 
@@ -933,9 +1031,9 @@
             background: var(--white);
             border: 1px solid var(--medium-gray);
             border-radius: var(--border-radius);
-            padding: 32px;
+            padding: 24px;
             width: 90%;
-            max-width: 450px;
+            max-width: 400px;
             box-shadow: var(--shadow-lg);
             transform: scale(0.9);
             transition: transform 0.3s ease;
@@ -949,19 +1047,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .modal-header h2 {
             color: var(--primary-color);
-            font-size: 24px;
+            font-size: 20px;
         }
 
         .close-modal {
             background: none;
             border: none;
             color: var(--text-secondary);
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
             transition: color 0.3s ease;
         }
@@ -985,14 +1083,14 @@
         .auth-required h2 {
             margin-bottom: 20px;
             color: var(--primary-color);
-            font-size: 32px;
+            font-size: 28px;
         }
 
         .auth-required p {
             margin-bottom: 32px;
             max-width: 500px;
             line-height: 1.6;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-secondary);
         }
 
@@ -1009,15 +1107,15 @@
             justify-content: center;
             background: var(--primary-color);
             color: white;
-            padding: 16px 32px;
+            padding: 14px 28px;
             border-radius: var(--border-radius);
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            min-width: 140px;
+            min-width: 130px;
             box-shadow: var(--shadow);
         }
 
@@ -1052,31 +1150,24 @@
         .empty-state h2 {
             margin-bottom: 20px;
             color: var(--primary-color);
-            font-size: 32px;
+            font-size: 28px;
         }
 
         .empty-state p {
             margin-bottom: 32px;
             max-width: 500px;
             line-height: 1.6;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-secondary);
         }
 
-        /* Balance Info */
-        .balance-info {
-            text-align: center;
-            padding: 16px;
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            margin: 16px 24px;
-            border: 1px solid var(--medium-gray);
-            font-size: 14px;
+        /* Subscription Info - مخفي */
+        .subscription-info {
             display: none;
         }
 
-        /* Message Limit Warning */
-        .message-limit-warning {
+        /* Subscription Expired Warning */
+        .subscription-expired-warning {
             text-align: center;
             padding: 16px;
             background: rgba(239, 68, 68, 0.1);
@@ -1091,16 +1182,16 @@
         .promo-form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
 
         .promo-input {
-            padding: 16px;
+            padding: 14px;
             background: var(--light-gray);
             border: 1px solid var(--medium-gray);
             border-radius: var(--border-radius-sm);
             color: var(--text-primary);
-            font-size: 16px;
+            font-size: 15px;
             outline: none;
             transition: all 0.3s ease;
         }
@@ -1114,9 +1205,9 @@
             background: var(--primary-color);
             color: white;
             border: none;
-            padding: 16px;
+            padding: 14px;
             border-radius: var(--border-radius-sm);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -1126,28 +1217,6 @@
         .promo-submit:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
-        }
-
-        /* Alert Messages */
-        .alert {
-            padding: 16px;
-            border-radius: var(--border-radius-sm);
-            margin: 16px 0;
-            text-align: center;
-            font-size: 14px;
-            border: 1px solid transparent;
-        }
-
-        .alert-success {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: rgba(16, 185, 129, 0.3);
-            color: var(--accent-color);
-        }
-
-        .alert-error {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: rgba(239, 68, 68, 0.3);
-            color: #ef4444;
         }
 
         /* Responsive Design */
@@ -1191,8 +1260,6 @@
             
             .mobile-model-btn {
                 display: flex;
-                align-items: center;
-                justify-content: center;
             }
             
             .input-wrapper {
@@ -1202,19 +1269,59 @@
             
             .input-field {
                 order: 1;
-                min-height: 50px;
+                min-height: 44px;
+                font-size: 15px;
             }
             
             .mobile-model-btn {
                 order: 2;
                 flex: 1;
                 min-width: auto;
+                font-size: 12px;
+                padding: 8px 12px;
+                height: 40px;
             }
             
             .send-button {
                 order: 3;
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .header-actions {
+                gap: 8px;
+            }
+            
+            .subscription-btn, .subscribed-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .subscription-status-header {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .ios-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+                min-width: 120px;
+            }
+            
+            .mobile-model-content {
+                padding: 16px;
+                margin: 10px;
+                max-width: 300px;
+            }
+            
+            .mobile-model-option {
+                padding: 14px 12px;
+                font-size: 14px;
+            }
+
+            .floating-notification {
+                padding: 14px 20px;
+                font-size: 14px;
             }
         }
 
@@ -1224,39 +1331,70 @@
             }
             
             .header-actions {
-                gap: 8px;
+                gap: 6px;
             }
             
-            .subscription-btn,
-            .promo-code-btn {
-                padding: 10px 16px;
-                font-size: 12px;
-            }
-            
-            .message-counter-header {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            
-            .ios-btn {
-                padding: 12px 24px;
-                font-size: 14px;
-                min-width: 120px;
+            .subscription-btn, .subscribed-btn {
+                padding: 8px 12px;
+                font-size: 11px;
             }
             
             .mobile-model-btn {
-                font-size: 13px;
-                padding: 10px 12px;
+                font-size: 11px;
+                padding: 6px 10px;
+                min-width: 70px;
+            }
+            
+            .input-field {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .send-button {
+                width: 36px;
+                height: 36px;
             }
             
             .mobile-model-content {
-                padding: 20px;
-                margin: 10px;
+                padding: 14px;
             }
             
             .mobile-model-option {
-                padding: 16px 12px;
-                font-size: 15px;
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+        }
+
+        /* تحسينات خاصة للهواتف الصغيرة */
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .header-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 4px;
+            }
+            
+            .subscription-btn, .subscribed-btn {
+                padding: 6px 10px;
+                font-size: 10px;
+            }
+            
+            .mobile-model-btn {
+                font-size: 10px;
+                padding: 5px 8px;
+                min-width: 65px;
+            }
+            
+            .input-wrapper {
+                padding: 6px;
+            }
+            
+            .input-field {
+                padding: 10px;
+                font-size: 13px;
             }
         }
 
@@ -1278,42 +1416,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-color);
         }
-
-        /* حلول محددة للهواتف 720x1600 */
-        @media screen and (width: 360px) and (height: 800px) and (orientation: portrait),
-               screen and (width: 800px) and (height: 360px) and (orientation: landscape),
-               screen and (width: 412px) and (height: 915px),
-               screen and (width: 390px) and (height: 844px) {
-            
-            body {
-                zoom: 1.1;
-                -webkit-text-size-adjust: 110%;
-                text-size-adjust: 110%;
-            }
-            
-            .header h1 {
-                font-size: 22px !important;
-            }
-            
-            .ios-btn, .subscription-btn, .promo-code-btn {
-                font-size: 15px !important;
-                padding: 14px 20px !important;
-                min-height: 48px !important;
-            }
-            
-            .message-content {
-                font-size: 17px !important;
-            }
-            
-            .input-field {
-                font-size: 17px !important;
-            }
-            
-            .mobile-model-btn {
-                font-size: 14px !important;
-                padding: 12px 14px !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1324,9 +1426,9 @@
     <div class="opening-animation">
         <div class="logo-container">
             <div class="logo-outer"></div>
-            <div class="logo-inner"> استعادة</div>
+            <div class="logo-inner"> GEAR</div>
         </div>
-        <div class="opening-text"> GEAR</div>
+        <div class="opening-text"> GEAR AI</div>
     </div>
 
     <!-- Modern Modal -->
@@ -1391,9 +1493,9 @@
                     </div>
                     <div class="user-details">
                         <div class="user-name" id="userName">مستخدم</div>
-                        <div class="message-count" id="messageCount">0 / 500 رسالة</div>
+                        <div class="subscription-status" id="subscriptionStatus" style="display: none;">30 يوم متبقي</div>
                     </div>
-                    <div class="message-counter" id="sidebarMessageCounter">500</div>
+                    <div class="subscription-badge" id="sidebarSubscriptionBadge" style="display: none;">30</div>
                 </div>
                 <button class="logout-btn" id="logoutBtn">تسجيل الخروج</button>
             </div>
@@ -1407,23 +1509,25 @@
                 </button>
                 <div class="header-center">
                     <h1>GEAR AI</h1>
+                    <div class="header-subtitle">مساعدك الذكي المتقدم</div>
                 </div>
                 <div class="header-actions">
-                    <div class="message-counter-header" id="headerMessageCounter">500 رسالة</div>
+                    <div class="subscription-status-header" id="headerSubscriptionStatus">30 يوم متبقي</div>
                     <button class="subscription-btn" id="subscriptionBtn">الاشتراك</button>
+                    <button class="subscribed-btn" id="subscribedBtn" style="display: none;">مشترك ✓</button>
                     <button class="promo-code-btn" id="promoCodeBtn">كود اشتراك</button>
                 </div>
             </div>
             
-            <!-- Balance Info -->
-            <div class="balance-info" id="balanceInfo">
-                <span id="balanceText">لديك <strong>500</strong> رسالة متبقية</span>
+            <!-- Subscription Expired Warning -->
+            <div class="subscription-expired-warning" id="subscriptionExpiredWarning">
+                <p>انتهى اشتراكك. <a href="#" style="color: var(--primary-color); text-decoration: underline;" id="subscribeLink">اشترك الآن</a> لمواصلة استخدام GEAR AI.</p>
             </div>
             
             <!-- Auth Required Screen -->
             <div class="auth-required" id="authRequired" style="display: none;">
                 <h2>تسجيل الدخول مطلوب</h2>
-                <p>يجب عليك تسجيل الدخول لاستخدام GEAR AI. ستحصل على 500 رسالة مجانية عند التسجيل.</p>
+                <p>يجب عليك تسجيل الدخول لاستخدام GEAR AI. ستحصل على 30 يوم مجانية عند التسجيل.</p>
                 <div class="auth-buttons">
                     <button class="ios-btn ios-btn-outline" onclick="goToAuth('login')">تسجيل الدخول</button>
                     <button class="ios-btn" onclick="goToAuth('signup')">إنشاء حساب</button>
@@ -1438,13 +1542,8 @@
                 </div>
             </div>
             
-            <!-- Message Limit Warning -->
-            <div class="message-limit-warning" id="messageLimitWarning">
-                <p>لقد نفذ حد الرسائل. <a href="#" style="color: var(--primary-color); text-decoration: underline;" id="subscribeLink">قم بالاشتراك</a> لتحصل على المزيد.</p>
-            </div>
-            
             <div class="input-container" id="inputContainer" style="display: none;">
-                <div class="input-wrapper">
+                <div class="input-wrapper" id="inputWrapper">
                     <textarea class="input-field" id="userInput" placeholder="اكتب رسالتك هنا..." rows="1"></textarea>
                     <div class="model-selector">
                         <select class="model-select" id="modelSelect">
@@ -1503,23 +1602,11 @@
             "cloudi": "Cloudi"
         };
 
-        // Special promo codes with their benefits
-        const specialPromoCodes = {
-            "GEAR78STUD": {
-                messages: 500,
-                premium: false,
-                description: "كود الطلاب - 500 رسالة"
-            },
-            "YOUSEFGEAR55": {
-                messages: 5000,
-                premium: true,
-                description: "كود مميز - 5000 رسالة + اشتراك بريميوم"
-            },
-            "IAMPRO8GE": {
-                messages: 8000,
-                premium: true,
-                description: "كود محترف - 8000 رسالة + اشتراك بريميوم"
-            }
+        // نظام الاشتراك بالمدة الزمنية
+        const subscriptionPlans = {
+            "GEAR78STUD": { days: 30, description: "كود الطلاب - 30 يوم" },
+            "YOUSEFGEAR55": { days: 60, description: "كود مميز - 60 يوم" },
+            "IAMPRO8GE": { days: 90, description: "كود محترف - 90 يوم" }
         };
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1534,18 +1621,17 @@
             const conversationList = document.getElementById('conversationList');
             const authRequired = document.getElementById('authRequired');
             const inputContainer = document.getElementById('inputContainer');
+            const inputWrapper = document.getElementById('inputWrapper');
             const userInfo = document.getElementById('userInfo');
             const userAvatar = document.getElementById('userAvatar');
             const userName = document.getElementById('userName');
-            const messageCount = document.getElementById('messageCount');
-            const sidebarMessageCounter = document.getElementById('sidebarMessageCounter');
-            const headerMessageCounter = document.getElementById('headerMessageCounter');
-            const balanceInfo = document.getElementById('balanceInfo');
-            const balanceText = document.getElementById('balanceText');
-            const logoutBtn = document.getElementById('logoutBtn');
+            const subscriptionStatus = document.getElementById('subscriptionStatus');
+            const sidebarSubscriptionBadge = document.getElementById('sidebarSubscriptionBadge');
+            const headerSubscriptionStatus = document.getElementById('headerSubscriptionStatus');
             const subscriptionBtn = document.getElementById('subscriptionBtn');
+            const subscribedBtn = document.getElementById('subscribedBtn');
             const promoCodeBtn = document.getElementById('promoCodeBtn');
-            const messageLimitWarning = document.getElementById('messageLimitWarning');
+            const subscriptionExpiredWarning = document.getElementById('subscriptionExpiredWarning');
             const subscribeLink = document.getElementById('subscribeLink');
             const emptyState = document.getElementById('emptyState');
             const promoModal = document.getElementById('promoModal');
@@ -1565,9 +1651,8 @@
             let currentConversationId = null;
             let isMobile = window.innerWidth <= 768;
             let currentUser = null;
-            let userMessageCount = 0;
-            let userPremiumStatus = false;
-            let userAvailableMessages = 500; // Changed from 50 to 500
+            let userSubscriptionActive = false;
+            let userSubscriptionExpiry = null;
             let isLoading = false;
             let currentModel = "grok-4.1-fast";
 
@@ -1582,6 +1667,7 @@
                 
                 loadCachedConversations();
                 updateModelDisplay();
+                updateInputWrapperState();
             }
             
             function detectScreenSize() {
@@ -1598,6 +1684,7 @@
                     this.style.height = 'auto';
                     this.style.height = (this.scrollHeight) + 'px';
                     updateSendButtonState();
+                    updateInputWrapperState();
                 });
                 
                 userInput.addEventListener('keydown', function(e) {
@@ -1607,6 +1694,14 @@
                             sendMessage();
                         }
                     }
+                });
+                
+                userInput.addEventListener('focus', function() {
+                    updateInputWrapperState();
+                });
+                
+                userInput.addEventListener('blur', function() {
+                    setTimeout(updateInputWrapperState, 200);
                 });
                 
                 sendButton.addEventListener('click', sendMessage);
@@ -1677,6 +1772,31 @@
                 });
             }
             
+            // تحديث حالة input wrapper بناءً على وجود نص
+            function updateInputWrapperState() {
+                const hasText = userInput.value.trim() !== '';
+                if (hasText) {
+                    inputWrapper.classList.add('has-text');
+                } else {
+                    inputWrapper.classList.remove('has-text');
+                }
+            }
+            
+            // Show floating notification
+            function showFloatingNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `floating-notification ${type}`;
+                notification.innerHTML = `
+                    <span>${message}</span>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+            
             function updateModelDisplay() {
                 currentModelDisplay.textContent = MODEL_DISPLAY_NAMES[currentModel];
                 
@@ -1701,20 +1821,61 @@
                 mobileModelBtn.classList.remove('active');
             }
             
+            // حساب الأيام المتبقية في الاشتراك
+            function calculateRemainingDays(subscriptionExpiry) {
+                if (!subscriptionExpiry) return 0;
+                
+                const now = new Date();
+                const expiry = subscriptionExpiry.toDate();
+                const diffTime = expiry - now;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                return Math.max(0, diffDays);
+            }
+
+            // تحديث حالة الاشتراك
+            function updateSubscriptionStatus(userData) {
+                const remainingDays = calculateRemainingDays(userData.subscriptionExpiry);
+                const isActive = remainingDays > 0;
+                
+                // إخفاء جميع عناصر حالة الاشتراك افتراضياً
+                subscriptionStatus.style.display = 'none';
+                sidebarSubscriptionBadge.style.display = 'none';
+                headerSubscriptionStatus.style.display = 'none';
+                promoCodeBtn.style.display = 'none';
+                
+                // إدارة أزرار الاشتراك
+                if (isActive) {
+                    subscriptionBtn.style.display = 'none';
+                    subscribedBtn.style.display = 'flex';
+                    subscriptionExpiredWarning.style.display = 'none';
+                    
+                    // إظهار زر كود الاشتراك فقط إذا كان الاشتراك نشط
+                    promoCodeBtn.style.display = 'flex';
+                } else {
+                    subscriptionBtn.style.display = 'flex';
+                    subscribedBtn.style.display = 'none';
+                    subscriptionExpiredWarning.style.display = 'block';
+                    headerSubscriptionStatus.style.display = 'flex';
+                    headerSubscriptionStatus.textContent = 'انتهى الاشتراك';
+                    headerSubscriptionStatus.className = 'subscription-status-header expired';
+                }
+                
+                return isActive;
+            }
+            
             function updateSendButtonState() {
                 const hasText = userInput.value.trim() !== '';
-                const hasMessages = userPremiumStatus || userMessageCount < userAvailableMessages;
+                const hasActiveSubscription = userSubscriptionActive;
                 
-                sendButton.disabled = !hasText || !hasMessages || isLoading;
+                sendButton.disabled = !hasText || !hasActiveSubscription || isLoading;
                 
-                if (!hasMessages) {
-                    userInput.placeholder = 'لقد نفذ حد الرسائل. استخدم كود اشتراك للحصول على المزيد';
+                if (!hasActiveSubscription) {
+                    userInput.placeholder = 'انتهى اشتراكك. استخدم كود اشتراك لتفعيل الاشتراك';
                     userInput.disabled = true;
-                    messageLimitWarning.style.display = 'block';
                 } else {
                     userInput.placeholder = 'اكتب رسالتك هنا...';
                     userInput.disabled = false;
-                    messageLimitWarning.style.display = 'none';
                 }
             }
             
@@ -1737,17 +1898,17 @@
                     const userDoc = await db.collection('users').doc(currentUser.uid).get();
                     if (userDoc.exists) {
                         const userData = userDoc.data();
-                        userMessageCount = userData.messages || 0;
-                        userPremiumStatus = userData.premium || false;
-                        userAvailableMessages = userData.availableMessages || 500; // Changed from 50 to 500
+                        userSubscriptionActive = userData.subscriptionActive || false;
+                        userSubscriptionExpiry = userData.subscriptionExpiry || null;
                         
-                        if (userPremiumStatus) {
+                        // تحديث حالة الاشتراك
+                        userSubscriptionActive = updateSubscriptionStatus(userData);
+                        
+                        if (userData.premium) {
                             userAvatar.classList.add('premium');
                         }
                     }
                     
-                    updateMessageCounters();
-                    updateBalanceInfo();
                     updateSendButtonState();
                     
                     await loadConversations();
@@ -1757,44 +1918,9 @@
                 }
             }
             
-            function updateMessageCounters() {
-                const remaining = userAvailableMessages - userMessageCount;
-                
-                messageCount.textContent = `${userMessageCount} / ${userAvailableMessages} رسالة`;
-                sidebarMessageCounter.textContent = remaining;
-                headerMessageCounter.textContent = `${remaining} رسالة`;
-                
-                sidebarMessageCounter.className = 'message-counter';
-                headerMessageCounter.className = 'message-counter-header';
-                
-                if (remaining <= 50) { // Adjusted threshold for 500 messages
-                    sidebarMessageCounter.style.background = '#ef4444';
-                } else if (remaining <= 100) { // Adjusted threshold for 500 messages
-                    sidebarMessageCounter.style.background = '#f59e0b';
-                }
-            }
-            
-            function updateBalanceInfo() {
-                const remaining = userAvailableMessages - userMessageCount;
-                balanceText.innerHTML = `لديك <strong>${remaining}</strong> رسالة متبقية`;
-                
-                if (remaining <= 50) { // Adjusted threshold for 500 messages
-                    balanceInfo.style.display = 'block';
-                    balanceInfo.style.background = 'rgba(239, 68, 68, 0.1)';
-                    balanceInfo.style.border = '1px solid rgba(239, 68, 68, 0.3)';
-                } else if (remaining <= 100) { // Adjusted threshold for 500 messages
-                    balanceInfo.style.display = 'block';
-                    balanceInfo.style.background = 'rgba(245, 158, 11, 0.1)';
-                    balanceInfo.style.border = '1px solid rgba(245, 158, 11, 0.3)';
-                } else {
-                    balanceInfo.style.display = 'block';
-                }
-            }
-            
             function showChatInterface() {
                 authRequired.style.display = 'none';
                 inputContainer.style.display = 'block';
-                balanceInfo.style.display = 'block';
                 
                 if (currentUser) {
                     const displayName = currentUser.displayName || 'مستخدم';
@@ -1808,7 +1934,7 @@
             function showAuthRequired() {
                 authRequired.style.display = 'flex';
                 inputContainer.style.display = 'none';
-                balanceInfo.style.display = 'none';
+                subscriptionExpiredWarning.style.display = 'none';
                 chatContainer.innerHTML = '';
                 chatContainer.appendChild(emptyState);
             }
@@ -1866,8 +1992,8 @@
                     return;
                 }
                 
-                if (specialPromoCodes[promoCode]) {
-                    const promoDetails = specialPromoCodes[promoCode];
+                if (subscriptionPlans[promoCode]) {
+                    const promoDetails = subscriptionPlans[promoCode];
                     
                     try {
                         const usedCodeDoc = await db.collection('usedPromoCodes').doc(`${currentUser.uid}_${promoCode}`).get();
@@ -1882,20 +2008,25 @@
                         
                         if (userDoc.exists) {
                             const userData = userDoc.data();
-                            const currentAvailableMessages = userData.availableMessages || 500; // Changed from 50 to 500
-                            const newAvailableMessages = currentAvailableMessages + promoDetails.messages;
                             
+                            // حساب تاريخ انتهاء الاشتراك الجديد
+                            let newExpiryDate;
+                            if (userData.subscriptionExpiry) {
+                                const currentExpiry = userData.subscriptionExpiry.toDate();
+                                newExpiryDate = new Date(currentExpiry);
+                                newExpiryDate.setDate(newExpiryDate.getDate() + promoDetails.days);
+                            } else {
+                                newExpiryDate = new Date();
+                                newExpiryDate.setDate(newExpiryDate.getDate() + promoDetails.days);
+                            }
+                            
+                            // Update user data with new subscription expiry
                             const updateData = {
-                                availableMessages: newAvailableMessages,
+                                subscriptionActive: true,
+                                subscriptionExpiry: firebase.firestore.Timestamp.fromDate(newExpiryDate),
                                 promoCodeUsed: promoCode,
                                 promoCodeUsedAt: firebase.firestore.FieldValue.serverTimestamp()
                             };
-                            
-                            if (promoDetails.premium) {
-                                updateData.premium = true;
-                                updateData.premiumSince = firebase.firestore.FieldValue.serverTimestamp();
-                                userPremiumStatus = true;
-                            }
                             
                             await userRef.update(updateData);
                             await db.collection('usedPromoCodes').doc(`${currentUser.uid}_${promoCode}`).set({
@@ -1904,28 +2035,26 @@
                                 usedAt: firebase.firestore.FieldValue.serverTimestamp()
                             });
                             
-                            userAvailableMessages = newAvailableMessages;
+                            userSubscriptionActive = true;
+                            userSubscriptionExpiry = firebase.firestore.Timestamp.fromDate(newExpiryDate);
                             
-                            updateMessageCounters();
-                            updateBalanceInfo();
+                            updateSubscriptionStatus({
+                                subscriptionExpiry: userSubscriptionExpiry
+                            });
                             updateSendButtonState();
                             
-                            if (userPremiumStatus) {
-                                userAvatar.classList.add('premium');
-                            }
+                            const remainingDays = calculateRemainingDays(userSubscriptionExpiry);
                             
-                            showPromoAlert(`🎉 تم تفعيل كود الاشتراك بنجاح! ${promoDetails.description} - لديك الآن ${userAvailableMessages} رسالة متاحة`, 'success');
-                            
-                            setTimeout(() => {
-                                closePromoModalFunc();
-                            }, 3000);
+                            // إغلاق المودال وإظهار الإشعار العائم
+                            closePromoModalFunc();
+                            showFloatingNotification(`🎉 تم تفعيل الاشتراك بنجاح! ${promoDetails.description}`, 'success');
                         }
                     } catch (error) {
                         console.error("Error activating promo code:", error);
-                        showPromoAlert('حدث خطأ أثناء تفعيل الكود. يرجى المحاولة مرة أخرى.', 'error');
+                        showFloatingNotification('حدث خطأ أثناء تفعيل الكود. يرجى المحاولة مرة أخرى.', 'error');
                     }
                 } else {
-                    showPromoAlert('كود الاشتراك غير صحيح. يرجى التحقق والمحاولة مرة أخرى.', 'error');
+                    showFloatingNotification('كود الاشتراك غير صحيح. يرجى التحقق والمحاولة مرة أخرى.', 'error');
                 }
             }
             
@@ -1943,7 +2072,7 @@
                     return;
                 }
                 
-                if (!userPremiumStatus && userMessageCount >= userAvailableMessages) {
+                if (!userSubscriptionActive) {
                     updateSendButtonState();
                     return;
                 }
@@ -1968,22 +2097,7 @@
                     
                     userInput.value = '';
                     userInput.style.height = 'auto';
-                    
-                    if (!userPremiumStatus) {
-                        userMessageCount++;
-                        
-                        try {
-                            await db.collection('users').doc(currentUser.uid).update({
-                                messages: userMessageCount
-                            });
-                        } catch (error) {
-                            console.error('Error updating message count:', error);
-                            saveUserDataToLocalStorage();
-                        }
-                    }
-                    
-                    updateMessageCounters();
-                    updateBalanceInfo();
+                    updateInputWrapperState();
                     
                     await saveCurrentConversation();
                     saveConversationsToLocalStorage();
@@ -2123,18 +2237,6 @@
             function cacheConversations(conversations) {
                 if (currentUser) {
                     localStorage.setItem(`conversations_${currentUser.uid}`, JSON.stringify(conversations));
-                }
-            }
-            
-            function saveUserDataToLocalStorage() {
-                if (currentUser) {
-                    const userData = {
-                        messages: userMessageCount,
-                        premium: userPremiumStatus,
-                        availableMessages: userAvailableMessages,
-                        lastUpdated: new Date().toISOString()
-                    };
-                    localStorage.setItem(`userData_${currentUser.uid}`, JSON.stringify(userData));
                 }
             }
             
