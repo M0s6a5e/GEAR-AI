@@ -27,7 +27,7 @@
             --border-radius-sm: 12px;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
-            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-family: 'Poppins', sans-serif;
         }
 
         * {
@@ -145,49 +145,6 @@
             }
         }
 
-        /* Floating Notification */
-        .floating-notification {
-            position: fixed;
-            top: 100px;
-            right: 50%;
-            transform: translateX(50%);
-            background: var(--primary-color);
-            color: white;
-            padding: 16px 24px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            animation: slideDown 0.3s ease-out;
-            max-width: 90%;
-            text-align: center;
-        }
-
-        .floating-notification.success {
-            background: var(--accent-color);
-        }
-
-        .floating-notification.error {
-            background: #ef4444;
-        }
-
-        .floating-notification.warning {
-            background: var(--warning-color);
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(50%) translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(50%) translateY(0);
-            }
-        }
-
         /* Main Layout */
         .app-container {
             display: flex;
@@ -196,7 +153,7 @@
             position: relative;
         }
 
-        /* Sidebar - Clean Design */
+        /* Sidebar */
         .sidebar {
             width: 320px;
             background: var(--white);
@@ -380,7 +337,7 @@
             overflow: hidden;
         }
 
-        /* Header - Clean Design */
+        /* Header */
         .header {
             padding: 20px 32px;
             background: var(--white);
@@ -446,14 +403,12 @@
             border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
-            display: none; /* مخفي افتراضياً */
         }
 
         .subscription-status-header.expired {
             background: rgba(239, 68, 68, 0.1);
             border-color: rgba(239, 68, 68, 0.3);
             color: #ef4444;
-            display: flex;
         }
 
         .subscription-btn {
@@ -486,26 +441,7 @@
             box-shadow: var(--shadow);
         }
 
-        .promo-code-btn {
-            padding: 12px 20px;
-            background: var(--light-gray);
-            border: 1px solid var(--medium-gray);
-            color: var(--text-primary);
-            border-radius: var(--border-radius);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: none; /* مخفي افتراضياً */
-        }
-
-        .promo-code-btn:hover {
-            background: var(--primary-light);
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        /* Chat Container */
+        /* Chat Container - محسّن للهواتف */
         .chat-container {
             flex: 1;
             overflow-y: auto;
@@ -513,6 +449,7 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             background: var(--light-bg);
+            padding-bottom: 100px; /* مسافة إضافية للشريط */
         }
 
         .message {
@@ -685,13 +622,17 @@
             }
         }
 
-        /* Input Container */
+        /* Input Container - محسّن للهواتف */
         .input-container {
-            padding: 24px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: var(--white);
             border-top: 1px solid var(--medium-gray);
-            position: relative;
-            z-index: 100;
+            padding: 16px;
+            z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
         }
 
         .input-wrapper {
@@ -699,14 +640,14 @@
             margin: 0 auto;
             position: relative;
             display: flex;
+            align-items: flex-end;
+            gap: 10px;
             background: var(--white);
             border: 1px solid var(--medium-gray);
             border-radius: var(--border-radius);
             padding: 8px;
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
-            gap: 8px;
-            align-items: flex-end;
         }
 
         .input-wrapper:focus-within {
@@ -714,27 +655,38 @@
             box-shadow: 0 0 20px rgba(74, 108, 247, 0.2);
         }
 
-        .input-wrapper.has-text .mobile-model-btn {
-            opacity: 0;
-            visibility: hidden;
-            width: 0;
-            margin: 0;
-            padding: 0;
-            transform: scale(0);
-            transition: all 0.3s ease;
+        .input-field {
+            flex: 1;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 16px;
+            outline: none;
+            resize: none;
+            max-height: 120px;
+            min-height: 24px;
+            line-height: 1.5;
+            font-family: var(--font-family);
+            overflow-y: auto;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .input-wrapper:not(.has-text) .mobile-model-btn {
-            opacity: 1;
-            visibility: visible;
-            width: auto;
-            margin: 0;
-            padding: 10px 14px;
-            transform: scale(1);
-            transition: all 0.3s ease;
+        .input-field::placeholder {
+            color: var(--text-secondary);
         }
 
-        /* Model Selector - Improved Design */
+        .input-field:focus {
+            outline: none;
+        }
+
+        /* جعل حقل الإدخال يملأ المساحة المتاحة */
+        .input-field:focus,
+        .input-field:not(:placeholder-shown) {
+            min-height: 40px;
+        }
+
         .model-selector {
             display: flex;
             align-items: center;
@@ -742,11 +694,10 @@
             border-left: 1px solid var(--medium-gray);
             background: var(--light-gray);
             border-radius: var(--border-radius-sm);
-            margin-left: 8px;
-            position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
             min-width: 120px;
+            flex-shrink: 0;
         }
 
         .model-selector:hover {
@@ -773,71 +724,6 @@
             padding-right: 24px;
         }
 
-        .model-select:focus {
-            outline: none;
-        }
-
-        .mobile-model-btn {
-            display: none;
-            background: var(--light-gray);
-            border: 1px solid var(--medium-gray);
-            color: var(--text-primary);
-            padding: 10px 14px;
-            border-radius: var(--border-radius-sm);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            min-width: 80px;
-            position: relative;
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .mobile-model-btn:hover {
-            background: var(--primary-light);
-            border-color: var(--primary-color);
-        }
-
-        .mobile-model-btn::after {
-            content: '';
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            margin-right: 6px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8.825L1.175 4 2.238 2.938 6 6.7l3.763-3.762L10.825 4z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center;
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-model-btn.active::after {
-            transform: rotate(180deg);
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 16px;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 16px;
-            outline: none;
-            resize: none;
-            max-height: 120px;
-            line-height: 1.5;
-            font-family: var(--font-family);
-            flex: 1;
-            transition: all 0.3s ease;
-        }
-
-        .input-field::placeholder {
-            color: var(--text-secondary);
-        }
-
         .send-button {
             background: var(--primary-color);
             color: white;
@@ -845,6 +731,7 @@
             border-radius: var(--border-radius-sm);
             width: 44px;
             height: 44px;
+            min-width: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -864,208 +751,6 @@
             color: var(--text-secondary);
             cursor: not-allowed;
             box-shadow: none;
-        }
-
-        /* Mobile Model Modal - Improved Design */
-        .mobile-model-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            padding: 20px;
-        }
-
-        .mobile-model-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .mobile-model-content {
-            background: var(--white);
-            border: 1px solid var(--medium-gray);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: var(--shadow-lg);
-            transform: scale(0.9) translateY(20px);
-            transition: all 0.3s ease;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .mobile-model-modal.active .mobile-model-content {
-            transform: scale(1) translateY(0);
-        }
-
-        .mobile-model-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .mobile-model-header h3 {
-            color: var(--primary-color);
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .close-mobile-model {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 20px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .close-mobile-model:hover {
-            color: var(--text-primary);
-            background: var(--light-gray);
-        }
-
-        .mobile-model-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .mobile-model-option {
-            padding: 16px 14px;
-            background: var(--light-gray);
-            border: 2px solid var(--medium-gray);
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: right;
-            font-size: 15px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mobile-model-option:hover {
-            background: var(--primary-light);
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .mobile-model-option.active {
-            background: var(--primary-light);
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            box-shadow: var(--shadow);
-        }
-
-        .mobile-model-option.active::before {
-            content: '';
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 6px;
-            height: 6px;
-            background: var(--primary-color);
-            border-radius: 50%;
-        }
-
-        .model-badge {
-            background: var(--primary-color);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .mobile-model-option.active .model-badge {
-            background: var(--white);
-            color: var(--primary-color);
-        }
-
-        /* Modern Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: var(--white);
-            border: 1px solid var(--medium-gray);
-            border-radius: var(--border-radius);
-            padding: 24px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: var(--shadow-lg);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-header h2 {
-            color: var(--primary-color);
-            font-size: 20px;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-modal:hover {
-            color: var(--text-primary);
         }
 
         /* Auth Required Screen */
@@ -1161,97 +846,37 @@
             color: var(--text-secondary);
         }
 
-        /* Subscription Info - مخفي */
-        .subscription-info {
+        /* إخفاء model selector في الهواتف وإظهار زر بديل */
+        .mobile-model-btn {
             display: none;
-        }
-
-        /* Subscription Expired Warning */
-        .subscription-expired-warning {
-            text-align: center;
-            padding: 16px;
-            background: rgba(239, 68, 68, 0.1);
-            border-radius: var(--border-radius);
-            margin: 16px 24px;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            font-size: 14px;
-            display: none;
-        }
-
-        /* Form Styles */
-        .promo-form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .promo-input {
-            padding: 14px;
             background: var(--light-gray);
             border: 1px solid var(--medium-gray);
-            border-radius: var(--border-radius-sm);
             color: var(--text-primary);
-            font-size: 15px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .promo-input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 20px rgba(74, 108, 247, 0.1);
-        }
-
-        .promo-submit {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 14px;
+            padding: 8px 12px;
             border-radius: var(--border-radius-sm);
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow);
+            white-space: nowrap;
+            min-width: 60px;
+            text-align: center;
         }
 
-        .promo-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Responsive Design */
+        /* تحسينات خاصة للهواتف */
         @media (max-width: 768px) {
-            .sidebar {
-                width: 85%;
-                max-width: 320px;
-            }
-            
-            .header {
-                padding: 16px 20px;
-            }
-            
-            .header h1 {
-                font-size: 20px;
-            }
-            
-            .chat-container {
-                padding: 16px;
-            }
-            
-            .message-content {
-                max-width: 90%;
-            }
-            
             .input-container {
-                padding: 16px;
+                padding: 12px;
             }
             
-            .auth-required, .empty-state {
-                padding: 24px;
+            .input-wrapper {
+                gap: 8px;
+                padding: 6px;
             }
             
-            .auth-required h2, .empty-state h2 {
-                font-size: 24px;
+            .input-field {
+                font-size: 15px;
+                padding: 10px 12px;
             }
             
             .model-selector {
@@ -1259,35 +884,23 @@
             }
             
             .mobile-model-btn {
-                display: flex;
+                display: block;
+                order: -1;
             }
             
-            .input-wrapper {
-                flex-wrap: wrap;
-                gap: 8px;
+            .chat-container {
+                padding: 16px;
+                padding-bottom: 120px; /* مسافة أكبر للشريط في الهواتف */
             }
             
-            .input-field {
-                order: 1;
-                min-height: 44px;
-                font-size: 15px;
+            .message-content {
+                max-width: 90%;
             }
             
-            .mobile-model-btn {
-                order: 2;
-                flex: 1;
-                min-width: auto;
-                font-size: 12px;
-                padding: 8px 12px;
-                height: 40px;
+            .header {
+                padding: 16px 20px;
             }
             
-            .send-button {
-                order: 3;
-                width: 40px;
-                height: 40px;
-            }
-
             .header-actions {
                 gap: 8px;
             }
@@ -1296,105 +909,50 @@
                 padding: 10px 16px;
                 font-size: 12px;
             }
-            
-            .subscription-status-header {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            
-            .ios-btn {
-                padding: 12px 20px;
-                font-size: 14px;
-                min-width: 120px;
-            }
-            
-            .mobile-model-content {
-                padding: 16px;
-                margin: 10px;
-                max-width: 300px;
-            }
-            
-            .mobile-model-option {
-                padding: 14px 12px;
-                font-size: 14px;
-            }
-
-            .floating-notification {
-                padding: 14px 20px;
-                font-size: 14px;
-            }
         }
 
         @media (max-width: 480px) {
-            .header {
-                padding: 12px 16px;
-            }
-            
-            .header-actions {
-                gap: 6px;
-            }
-            
-            .subscription-btn, .subscribed-btn {
-                padding: 8px 12px;
-                font-size: 11px;
-            }
-            
-            .mobile-model-btn {
-                font-size: 11px;
-                padding: 6px 10px;
-                min-width: 70px;
-            }
-            
             .input-field {
                 font-size: 14px;
-                padding: 12px;
             }
             
             .send-button {
-                width: 36px;
-                height: 36px;
-            }
-            
-            .mobile-model-content {
-                padding: 14px;
-            }
-            
-            .mobile-model-option {
-                padding: 12px 10px;
-                font-size: 13px;
-            }
-        }
-
-        /* تحسينات خاصة للهواتف الصغيرة */
-        @media (max-width: 360px) {
-            .header h1 {
-                font-size: 18px;
-            }
-            
-            .header-actions {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 4px;
-            }
-            
-            .subscription-btn, .subscribed-btn {
-                padding: 6px 10px;
-                font-size: 10px;
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
             }
             
             .mobile-model-btn {
-                font-size: 10px;
-                padding: 5px 8px;
-                min-width: 65px;
+                font-size: 11px;
+                padding: 6px 8px;
+                min-width: 50px;
             }
             
+            .chat-container {
+                padding-bottom: 130px;
+            }
+        }
+
+        /* تحسينات خاصة للهواتف الصغيرة جداً */
+        @media (max-width: 360px) {
             .input-wrapper {
-                padding: 6px;
+                flex-wrap: wrap;
             }
             
             .input-field {
-                padding: 10px;
-                font-size: 13px;
+                order: 1;
+                min-height: 36px;
+            }
+            
+            .mobile-model-btn {
+                order: 2;
+                flex: 1;
+                margin-top: 5px;
+            }
+            
+            .send-button {
+                order: 3;
+                margin-top: 5px;
             }
         }
 
@@ -1429,45 +987,6 @@
             <div class="logo-inner"> GEAR</div>
         </div>
         <div class="opening-text"> GEAR AI</div>
-    </div>
-
-    <!-- Modern Modal -->
-    <div class="modal-overlay" id="promoModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>تفعيل كود الاشتراك</h2>
-                <button class="close-modal" id="closePromoModal">&times;</button>
-            </div>
-            <form class="promo-form" id="promoForm">
-                <input type="text" class="promo-input" id="promoCodeInput" placeholder="أدخل كود الاشتراك هنا" required>
-                <button type="submit" class="promo-submit">تفعيل الكود</button>
-            </form>
-            <div id="promoAlert"></div>
-        </div>
-    </div>
-
-    <!-- Mobile Model Modal -->
-    <div class="mobile-model-modal" id="mobileModelModal">
-        <div class="mobile-model-content">
-            <div class="mobile-model-header">
-                <h3>اختر الموديل</h3>
-                <button class="close-mobile-model" id="closeMobileModelModal">&times;</button>
-            </div>
-            <div class="mobile-model-options" id="mobileModelOptions">
-                <div class="mobile-model-option" data-model="grok-4.1-fast">
-                    <span>GPT-5</span>
-                    <span class="model-badge">متميز</span>
-                </div>
-                <div class="mobile-model-option" data-model="deepseek">
-                    <span>DeepSeek</span>
-                    <span class="model-badge">سريع</span>
-                </div>
-                <div class="mobile-model-option" data-model="cloudi">
-                    <span>Cloudi</span>
-                    <span class="model-badge">متقدم</span>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Main App Container -->
@@ -1515,13 +1034,7 @@
                     <div class="subscription-status-header" id="headerSubscriptionStatus">30 يوم متبقي</div>
                     <button class="subscription-btn" id="subscriptionBtn">الاشتراك</button>
                     <button class="subscribed-btn" id="subscribedBtn" style="display: none;">مشترك ✓</button>
-                    <button class="promo-code-btn" id="promoCodeBtn">كود اشتراك</button>
                 </div>
-            </div>
-            
-            <!-- Subscription Expired Warning -->
-            <div class="subscription-expired-warning" id="subscriptionExpiredWarning">
-                <p>انتهى اشتراكك. <a href="#" style="color: var(--primary-color); text-decoration: underline;" id="subscribeLink">اشترك الآن</a> لمواصلة استخدام GEAR AI.</p>
             </div>
             
             <!-- Auth Required Screen -->
@@ -1529,8 +1042,8 @@
                 <h2>تسجيل الدخول مطلوب</h2>
                 <p>يجب عليك تسجيل الدخول لاستخدام GEAR AI. ستحصل على 30 يوم مجانية عند التسجيل.</p>
                 <div class="auth-buttons">
-                    <button class="ios-btn ios-btn-outline" onclick="goToAuth('login')">تسجيل الدخول</button>
-                    <button class="ios-btn" onclick="goToAuth('signup')">إنشاء حساب</button>
+                    <a href="index.html?action=login" class="ios-btn ios-btn-outline">تسجيل الدخول</a>
+                    <a href="index.html?action=signup" class="ios-btn">إنشاء حساب</a>
                 </div>
             </div>
             
@@ -1544,6 +1057,9 @@
             
             <div class="input-container" id="inputContainer" style="display: none;">
                 <div class="input-wrapper" id="inputWrapper">
+                    <button class="mobile-model-btn" id="mobileModelBtn">
+                        GPT-5
+                    </button>
                     <textarea class="input-field" id="userInput" placeholder="اكتب رسالتك هنا..." rows="1"></textarea>
                     <div class="model-selector">
                         <select class="model-select" id="modelSelect">
@@ -1552,9 +1068,6 @@
                             <option value="cloudi">Cloudi</option>
                         </select>
                     </div>
-                    <button class="mobile-model-btn" id="mobileModelBtn">
-                        <span id="currentModelDisplay">GPT-5</span>
-                    </button>
                     <button class="send-button" id="sendButton" disabled>
                         <span>➤</span>
                     </button>
@@ -1602,13 +1115,6 @@
             "cloudi": "Cloudi"
         };
 
-        // نظام الاشتراك بالمدة الزمنية
-        const subscriptionPlans = {
-            "GEAR78STUD": { days: 30, description: "كود الطلاب - 30 يوم" },
-            "YOUSEFGEAR55": { days: 60, description: "كود مميز - 60 يوم" },
-            "IAMPRO8GE": { days: 90, description: "كود محترف - 90 يوم" }
-        };
-
         document.addEventListener('DOMContentLoaded', function() {
             // DOM Elements
             const chatContainer = document.getElementById('chatContainer');
@@ -1617,11 +1123,9 @@
             const newChatBtn = document.getElementById('newChatBtn');
             const menuButton = document.getElementById('menuButton');
             const sidebar = document.getElementById('sidebar');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
             const conversationList = document.getElementById('conversationList');
             const authRequired = document.getElementById('authRequired');
             const inputContainer = document.getElementById('inputContainer');
-            const inputWrapper = document.getElementById('inputWrapper');
             const userInfo = document.getElementById('userInfo');
             const userAvatar = document.getElementById('userAvatar');
             const userName = document.getElementById('userName');
@@ -1630,21 +1134,10 @@
             const headerSubscriptionStatus = document.getElementById('headerSubscriptionStatus');
             const subscriptionBtn = document.getElementById('subscriptionBtn');
             const subscribedBtn = document.getElementById('subscribedBtn');
-            const promoCodeBtn = document.getElementById('promoCodeBtn');
-            const subscriptionExpiredWarning = document.getElementById('subscriptionExpiredWarning');
-            const subscribeLink = document.getElementById('subscribeLink');
             const emptyState = document.getElementById('emptyState');
-            const promoModal = document.getElementById('promoModal');
-            const closePromoModal = document.getElementById('closePromoModal');
-            const promoForm = document.getElementById('promoForm');
-            const promoCodeInput = document.getElementById('promoCodeInput');
-            const promoAlert = document.getElementById('promoAlert');
             const modelSelect = document.getElementById('modelSelect');
             const mobileModelBtn = document.getElementById('mobileModelBtn');
-            const currentModelDisplay = document.getElementById('currentModelDisplay');
-            const mobileModelModal = document.getElementById('mobileModelModal');
-            const closeMobileModelModal = document.getElementById('closeMobileModelModal');
-            const mobileModelOptions = document.getElementById('mobileModelOptions');
+            const logoutBtn = document.getElementById('logoutBtn');
             
             // State variables
             let conversationHistory = [];
@@ -1667,7 +1160,9 @@
                 
                 loadCachedConversations();
                 updateModelDisplay();
-                updateInputWrapperState();
+                
+                // تحسين حجم حقل الإدخال تلقائياً
+                autoResizeTextarea();
             }
             
             function detectScreenSize() {
@@ -1680,11 +1175,10 @@
             }
             
             function setupEventListeners() {
+                // تحسين حقل الإدخال للهواتف
                 userInput.addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = (this.scrollHeight) + 'px';
+                    autoResizeTextarea();
                     updateSendButtonState();
-                    updateInputWrapperState();
                 });
                 
                 userInput.addEventListener('keydown', function(e) {
@@ -1697,45 +1191,40 @@
                 });
                 
                 userInput.addEventListener('focus', function() {
-                    updateInputWrapperState();
-                });
-                
-                userInput.addEventListener('blur', function() {
-                    setTimeout(updateInputWrapperState, 200);
+                    // تأخير scroll للسماح بإظهار لوحة المفاتيح
+                    setTimeout(() => {
+                        scrollToBottom();
+                    }, 300);
                 });
                 
                 sendButton.addEventListener('click', sendMessage);
                 newChatBtn.addEventListener('click', startNewChat);
                 menuButton.addEventListener('click', toggleSidebar);
-                sidebarOverlay.addEventListener('click', closeSidebar);
                 logoutBtn.addEventListener('click', logout);
                 subscriptionBtn.addEventListener('click', goToSubscription);
-                subscribeLink.addEventListener('click', goToSubscription);
-                promoCodeBtn.addEventListener('click', openPromoModal);
-                closePromoModal.addEventListener('click', closePromoModalFunc);
-                promoForm.addEventListener('submit', handlePromoCodeSubmit);
                 modelSelect.addEventListener('change', function() {
                     currentModel = this.value;
                     updateModelDisplay();
                 });
                 
-                mobileModelBtn.addEventListener('click', openMobileModelModal);
-                closeMobileModelModal.addEventListener('click', closeMobileModelModalFunc);
-                
-                // Add event listeners for mobile model options
-                const modelOptions = mobileModelOptions.querySelectorAll('.mobile-model-option');
-                modelOptions.forEach(option => {
-                    option.addEventListener('click', function() {
-                        const selectedModel = this.getAttribute('data-model');
-                        currentModel = selectedModel;
+                mobileModelBtn.addEventListener('click', function() {
+                    // تحويل إلى قائمة منسدلة بسيطة للهواتف
+                    const options = ['GPT-5', 'DeepSeek', 'Cloudi'];
+                    const currentIndex = options.findIndex(opt => opt === MODEL_DISPLAY_NAMES[currentModel]);
+                    const nextIndex = (currentIndex + 1) % options.length;
+                    
+                    // الحصول على القيمة المقابلة للاسم المعروض
+                    const modelEntries = Object.entries(MODEL_DISPLAY_NAMES);
+                    const nextModel = modelEntries.find(([key, value]) => value === options[nextIndex]);
+                    
+                    if (nextModel) {
+                        currentModel = nextModel[0];
+                        modelSelect.value = currentModel;
                         updateModelDisplay();
-                        closeMobileModelModalFunc();
-                        
-                        // Update desktop selector as well
-                        modelSelect.value = selectedModel;
-                    });
+                    }
                 });
                 
+                // إغلاق القائمة عند النقر خارجها
                 document.addEventListener('click', function(e) {
                     if (isMobile && sidebar.classList.contains('open') && 
                         !sidebar.contains(e.target) && 
@@ -1743,82 +1232,25 @@
                         closeSidebar();
                     }
                 });
-                
-                promoModal.addEventListener('click', function(e) {
-                    if (e.target === promoModal) {
-                        closePromoModalFunc();
-                    }
-                });
-                
-                mobileModelModal.addEventListener('click', function(e) {
-                    if (e.target === mobileModelModal) {
-                        closeMobileModelModalFunc();
-                    }
-                });
-                
-                window.addEventListener('beforeunload', function() {
-                    saveConversationsToLocalStorage();
-                });
-
-                // Add interactive effects
-                const interactiveElements = document.querySelectorAll('.conversation-item, .menu-button, .send-button, .ios-btn');
-                interactiveElements.forEach(el => {
-                    el.addEventListener('mouseenter', () => {
-                        el.style.transform = 'translateY(-2px)';
-                    });
-                    el.addEventListener('mouseleave', () => {
-                        el.style.transform = 'translateY(0)';
-                    });
-                });
             }
             
-            // تحديث حالة input wrapper بناءً على وجود نص
-            function updateInputWrapperState() {
-                const hasText = userInput.value.trim() !== '';
-                if (hasText) {
-                    inputWrapper.classList.add('has-text');
+            // تحسين حجم textarea تلقائياً
+            function autoResizeTextarea() {
+                userInput.style.height = 'auto';
+                userInput.style.height = userInput.scrollHeight + 'px';
+                
+                // تحديد ارتفاع أقصى
+                const maxHeight = 120;
+                if (userInput.scrollHeight > maxHeight) {
+                    userInput.style.height = maxHeight + 'px';
+                    userInput.style.overflowY = 'auto';
                 } else {
-                    inputWrapper.classList.remove('has-text');
+                    userInput.style.overflowY = 'hidden';
                 }
             }
             
-            // Show floating notification
-            function showFloatingNotification(message, type = 'info') {
-                const notification = document.createElement('div');
-                notification.className = `floating-notification ${type}`;
-                notification.innerHTML = `
-                    <span>${message}</span>
-                `;
-                
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
-            }
-            
             function updateModelDisplay() {
-                currentModelDisplay.textContent = MODEL_DISPLAY_NAMES[currentModel];
-                
-                // Update active state in mobile modal
-                const modelOptions = mobileModelOptions.querySelectorAll('.mobile-model-option');
-                modelOptions.forEach(option => {
-                    if (option.getAttribute('data-model') === currentModel) {
-                        option.classList.add('active');
-                    } else {
-                        option.classList.remove('active');
-                    }
-                });
-            }
-            
-            function openMobileModelModal() {
-                mobileModelModal.classList.add('active');
-                mobileModelBtn.classList.add('active');
-            }
-            
-            function closeMobileModelModalFunc() {
-                mobileModelModal.classList.remove('active');
-                mobileModelBtn.classList.remove('active');
+                mobileModelBtn.textContent = MODEL_DISPLAY_NAMES[currentModel];
             }
             
             // حساب الأيام المتبقية في الاشتراك
@@ -1838,27 +1270,27 @@
                 const remainingDays = calculateRemainingDays(userData.subscriptionExpiry);
                 const isActive = remainingDays > 0;
                 
-                // إخفاء جميع عناصر حالة الاشتراك افتراضياً
-                subscriptionStatus.style.display = 'none';
-                sidebarSubscriptionBadge.style.display = 'none';
-                headerSubscriptionStatus.style.display = 'none';
-                promoCodeBtn.style.display = 'none';
-                
-                // إدارة أزرار الاشتراك
                 if (isActive) {
                     subscriptionBtn.style.display = 'none';
                     subscribedBtn.style.display = 'flex';
-                    subscriptionExpiredWarning.style.display = 'none';
+                    headerSubscriptionStatus.textContent = `${remainingDays} يوم متبقي`;
+                    headerSubscriptionStatus.className = 'subscription-status-header';
                     
-                    // إظهار زر كود الاشتراك فقط إذا كان الاشتراك نشط
-                    promoCodeBtn.style.display = 'flex';
+                    // تحديث حالة الاشتراك في الشريط الجانبي
+                    subscriptionStatus.style.display = 'block';
+                    subscriptionStatus.textContent = `${remainingDays} يوم متبقي`;
+                    
+                    if (remainingDays <= 7) {
+                        headerSubscriptionStatus.classList.add('warning');
+                        subscriptionStatus.classList.add('warning');
+                    }
                 } else {
                     subscriptionBtn.style.display = 'flex';
                     subscribedBtn.style.display = 'none';
-                    subscriptionExpiredWarning.style.display = 'block';
-                    headerSubscriptionStatus.style.display = 'flex';
                     headerSubscriptionStatus.textContent = 'انتهى الاشتراك';
                     headerSubscriptionStatus.className = 'subscription-status-header expired';
+                    
+                    subscriptionStatus.style.display = 'none';
                 }
                 
                 return isActive;
@@ -1871,7 +1303,7 @@
                 sendButton.disabled = !hasText || !hasActiveSubscription || isLoading;
                 
                 if (!hasActiveSubscription) {
-                    userInput.placeholder = 'انتهى اشتراكك. استخدم كود اشتراك لتفعيل الاشتراك';
+                    userInput.placeholder = 'انتهى اشتراكك. قم بتجديد الاشتراك للمتابعة';
                     userInput.disabled = true;
                 } else {
                     userInput.placeholder = 'اكتب رسالتك هنا...';
@@ -1927,14 +1359,13 @@
                     const userInitial = displayName.charAt(0);
                     
                     userName.textContent = displayName;
-                    userAvatar.innerHTML = userInitial;
+                    userAvatar.textContent = userInitial;
                 }
             }
             
             function showAuthRequired() {
                 authRequired.style.display = 'flex';
                 inputContainer.style.display = 'none';
-                subscriptionExpiredWarning.style.display = 'none';
                 chatContainer.innerHTML = '';
                 chatContainer.appendChild(emptyState);
             }
@@ -1944,126 +1375,24 @@
                 
                 if (!isMobile) {
                     sidebar.classList.add('open');
-                    sidebarOverlay.classList.remove('visible');
                 } else {
                     sidebar.classList.remove('open');
                 }
                 
                 detectScreenSize();
+                autoResizeTextarea();
             }
             
             function toggleSidebar() {
                 if (isMobile) {
                     sidebar.classList.toggle('open');
-                    sidebarOverlay.classList.toggle('visible');
                 }
             }
             
             function closeSidebar() {
                 if (isMobile) {
                     sidebar.classList.remove('open');
-                    sidebarOverlay.classList.remove('visible');
                 }
-            }
-            
-            function openPromoModal() {
-                promoModal.classList.add('active');
-            }
-            
-            function closePromoModalFunc() {
-                promoModal.classList.remove('active');
-                promoCodeInput.value = '';
-                promoAlert.innerHTML = '';
-            }
-            
-            async function handlePromoCodeSubmit(e) {
-                e.preventDefault();
-                
-                const promoCode = promoCodeInput.value.trim().toUpperCase();
-                
-                if (!promoCode) {
-                    showPromoAlert('يرجى إدخال كود الاشتراك', 'error');
-                    return;
-                }
-                
-                if (!currentUser) {
-                    showPromoAlert('يجب تسجيل الدخول أولاً لتفعيل كود الاشتراك', 'error');
-                    closePromoModalFunc();
-                    return;
-                }
-                
-                if (subscriptionPlans[promoCode]) {
-                    const promoDetails = subscriptionPlans[promoCode];
-                    
-                    try {
-                        const usedCodeDoc = await db.collection('usedPromoCodes').doc(`${currentUser.uid}_${promoCode}`).get();
-                        
-                        if (usedCodeDoc.exists) {
-                            showPromoAlert('لقد استخدمت هذا الكود من قبل. كل كود يمكن استخدامه مرة واحدة فقط.', 'error');
-                            return;
-                        }
-                        
-                        const userRef = db.collection('users').doc(currentUser.uid);
-                        const userDoc = await userRef.get();
-                        
-                        if (userDoc.exists) {
-                            const userData = userDoc.data();
-                            
-                            // حساب تاريخ انتهاء الاشتراك الجديد
-                            let newExpiryDate;
-                            if (userData.subscriptionExpiry) {
-                                const currentExpiry = userData.subscriptionExpiry.toDate();
-                                newExpiryDate = new Date(currentExpiry);
-                                newExpiryDate.setDate(newExpiryDate.getDate() + promoDetails.days);
-                            } else {
-                                newExpiryDate = new Date();
-                                newExpiryDate.setDate(newExpiryDate.getDate() + promoDetails.days);
-                            }
-                            
-                            // Update user data with new subscription expiry
-                            const updateData = {
-                                subscriptionActive: true,
-                                subscriptionExpiry: firebase.firestore.Timestamp.fromDate(newExpiryDate),
-                                promoCodeUsed: promoCode,
-                                promoCodeUsedAt: firebase.firestore.FieldValue.serverTimestamp()
-                            };
-                            
-                            await userRef.update(updateData);
-                            await db.collection('usedPromoCodes').doc(`${currentUser.uid}_${promoCode}`).set({
-                                userId: currentUser.uid,
-                                promoCode: promoCode,
-                                usedAt: firebase.firestore.FieldValue.serverTimestamp()
-                            });
-                            
-                            userSubscriptionActive = true;
-                            userSubscriptionExpiry = firebase.firestore.Timestamp.fromDate(newExpiryDate);
-                            
-                            updateSubscriptionStatus({
-                                subscriptionExpiry: userSubscriptionExpiry
-                            });
-                            updateSendButtonState();
-                            
-                            const remainingDays = calculateRemainingDays(userSubscriptionExpiry);
-                            
-                            // إغلاق المودال وإظهار الإشعار العائم
-                            closePromoModalFunc();
-                            showFloatingNotification(`🎉 تم تفعيل الاشتراك بنجاح! ${promoDetails.description}`, 'success');
-                        }
-                    } catch (error) {
-                        console.error("Error activating promo code:", error);
-                        showFloatingNotification('حدث خطأ أثناء تفعيل الكود. يرجى المحاولة مرة أخرى.', 'error');
-                    }
-                } else {
-                    showFloatingNotification('كود الاشتراك غير صحيح. يرجى التحقق والمحاولة مرة أخرى.', 'error');
-                }
-            }
-            
-            function showPromoAlert(message, type) {
-                promoAlert.innerHTML = `
-                    <div class="alert alert-${type}">
-                        ${message}
-                    </div>
-                `;
             }
             
             async function sendMessage() {
@@ -2096,8 +1425,7 @@
                     });
                     
                     userInput.value = '';
-                    userInput.style.height = 'auto';
-                    updateInputWrapperState();
+                    autoResizeTextarea();
                     
                     await saveCurrentConversation();
                     saveConversationsToLocalStorage();
@@ -2155,6 +1483,7 @@
                 } finally {
                     isLoading = false;
                     updateSendButtonState();
+                    scrollToBottom();
                 }
             }
             
@@ -2531,6 +1860,10 @@
             function scrollToBottom() {
                 setTimeout(() => {
                     chatContainer.scrollTop = chatContainer.scrollHeight;
+                    // تأكد من أن حقل الإدخال مرئي على الهواتف
+                    if (isMobile) {
+                        userInput.focus();
+                    }
                 }, 100);
             }
             
@@ -2538,19 +1871,14 @@
                 try {
                     saveConversationsToLocalStorage();
                     await auth.signOut();
-                    showAuthRequired();
+                    window.location.href = 'index.html';
                 } catch (error) {
                     console.error('Error logging out:', error);
                 }
             }
             
-            function goToSubscription(e) {
-                if (e) e.preventDefault();
+            function goToSubscription() {
                 window.location.href = 'index.html#pricing';
-            }
-            
-            function goToAuth(type) {
-                window.location.href = `index.html?action=${type}`;
             }
 
             // Initialize the app
